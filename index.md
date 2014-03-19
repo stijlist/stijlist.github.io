@@ -4,7 +4,7 @@ I'm a programmer and student of economics based in Austin, TX.
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
-I try and focus on the fact that technology is a tool, and it's more important 
+I try to focus on the fact that technology is a tool, and it's more important 
 to focus on the effects our technology has on us is than how it's implemented, 
 all else equal.
 
