@@ -48,6 +48,6 @@ and computer systems:
 - OS X
 
 
-[1]: github.com/stijlist
-[2]: somethingdoneright.net
-[3]: paulgraham.com/avg.html
+[1]: http://github.com/stijlist
+[2]: http://somethingdoneright.net
+[3]: http://paulgraham.com/avg.html
