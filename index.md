@@ -4,12 +4,15 @@ I'm a programmer and student of economics based in Austin, TX.
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
+My projects are on [GitHub][1], and I write over at
+[somethingdoneright.net][2].
+
 I try to focus on the fact that technology is a tool, and it's more important 
 to focus on the effects our technology has on us is than how it's implemented, 
 all else equal.
 
 On the flip side, the way you build your software can drastically change the
-[nature of the process](beating the averages), so it's foolish not to study 
+[nature of the process][3], so it's foolish not to study 
 interesting methods of writing software.
 
 In my projects, I strive to:
@@ -44,3 +47,7 @@ and computer systems:
 - Linux (Arch, Ubuntu)
 - OS X
 
+
+[1]: github.com/stijlist
+[2]: somethingdoneright.net
+[3]: paulgraham.com/avg.html
