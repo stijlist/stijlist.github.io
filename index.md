@@ -18,6 +18,7 @@ interesting methods of writing software.
 In my projects, I strive to:
 
 - minimize complexity
+- be aware of prior work in my problem domain
 - avoid writing programs when reusing an already-written program will be
   effective
 - avoid complex configuration of the software I'm using when possible
