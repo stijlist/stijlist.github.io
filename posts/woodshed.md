@@ -1,0 +1,10 @@
+Summer courses ended today. 
+I'm free for the rest of the summer. 
+The blank slate is invigorating.
+
+I'd expressed my intention to focus on iOS development in earnest the second half of the summer, and my parents surprised me today with a Macbook. They seem to believe in me. I'm not surprised, but I am grateful.
+
+Today:
+
+- set up the Mac
+- finished the first two lectures of Stanford CS193p

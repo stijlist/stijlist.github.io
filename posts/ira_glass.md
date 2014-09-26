@@ -1,0 +1,3 @@
+Most of what I write here isn't very good yet, and I'm aware of that. I'm hoping that I'll get better faster if I spend more time writing and put it out there. 
+
+<iframe src="//player.vimeo.com/video/24715531" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/24715531">Ira Glass on Storytelling</a> from <a href="http://vimeo.com/thedak">David Shiyang Liu</a> on <a href="https://vimeo.com">Vimeo</a>.</p>

@@ -1,0 +1,5 @@
+I realized today that I was wrong about Webkit. 
+
+A few months ago, I wrote a blog post arguing that we needed a simpler, more comprehensible browser implementation so that we could experiment with different ways of extending and improving the web. I've come around on this now; we don't need to reimplement WebKit to improve the web. I think our solution to the glacial rate of progress in the browser will be something that works from the top of the software stack down, and I think web components and the [Extensible Web Manifesto](http://extensiblewebmanifesto.org) really hit the nail on the head in addressing this. From the bottom of the stack, we have [Servo](https://github.com/mozilla/servo), and the two initiatives will meet in the middle sooner rather than later. 
+
+I still feel like there's a place for a simpler implementation of the browser, but it's not as critical to progress as I'd initially thought.
