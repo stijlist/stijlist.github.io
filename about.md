@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-My name is Bert Muthalaly, and I'm a programmer and student of economics based in New York City, currently working for [Sefaira][sefaira]. 
+My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Hacker School][hackerschool] alum based in New York City, currently working for [Sefaira][sefaira]. 
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
@@ -38,6 +38,7 @@ In my projects, I strive to:
 [2]: http://somethingdoneright.net
 [3]: http://paulgraham.com/avg.html
 [sefaira]: http://sefaira.com
+[hackerschool]: http://hackerschool.com
 [vpri]: http://www.vpri.org/pdf/tr2011004_steps11.pdf
 [forth]: http://www.yosefk.com/blog/my-history-with-forth-stack-machines.html
 [bloom]: http://boom.cs.berkeley.edu
