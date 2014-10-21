@@ -1,4 +1,5 @@
 ---
+title: building intuition
 layout: post
 ---
 Recently, I read [Nine Open Problems for Conjunctive and Boolean Gramars](http://users.utu.fi/aleokh/boolean/nine_open_problems.html). I'm excited that these problems are still open, and I'm thankful that Alex Okhotin took the trouble to compile this list so that relative laypeople like me could start nibbling around the edges of this problem space. If I really wanted to start developing a deep intuition about conjunctive and Boolean grammars, though, where would I begin? 

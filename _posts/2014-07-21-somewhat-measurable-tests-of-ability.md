@@ -1,4 +1,5 @@
 ---
+title: somewhat measurable tests of ability
 layout: post
 ---
 I had a great talk with Mel Chua (one of our wonderful hacker school residents) last week about learning styles, motivation, and goal-setting. It was illuminating in many ways, but I'll just talk here about one aspect I attempted to put into practice this weekend.

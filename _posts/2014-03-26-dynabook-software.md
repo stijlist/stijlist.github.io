@@ -1,4 +1,5 @@
 ---
+title: dynabook software
 layout: post
 ---
 I saw [David Nolen's wonderful Clojure West talk today][1], and it inspired me immensely.  Specifically, the two demos he showed towards the end: [zenrise, an

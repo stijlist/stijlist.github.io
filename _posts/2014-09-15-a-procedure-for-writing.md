@@ -1,4 +1,5 @@
 ---
+title: a procedure for writing
 layout: post
 ---
 1. take notes. notes are facts, quotes, or ideas, often compiled into simple bulleted lists. having references to the source material is invaluable. [markdown](http://www.daringfireball.net/markdown) is great for this.

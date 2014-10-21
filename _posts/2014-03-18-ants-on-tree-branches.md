@@ -1,4 +1,5 @@
 ---
+title: ants on tree branches
 layout: post
 ---
 Bret Victor, in his [links for 2013][1], uses the metaphor of ants on a tree

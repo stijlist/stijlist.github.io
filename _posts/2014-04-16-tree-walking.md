@@ -1,4 +1,5 @@
 ---
+title: tree walking
 layout: post
 ---
 So I’ve been working on my basketball tournament bracket program in ClojureScript on and off for a few days and I’ve been struggling with how best to write the code that actually lays out the bracket on the page. More specifically, I feel like the layout code should be able to build up the entire tree of the bracket from just the initial state, and represent unrealized games as parent nodes of the realized child games, and I’m having trouble actually writing layout code that does this. 

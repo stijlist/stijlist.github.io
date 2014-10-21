@@ -1,4 +1,5 @@
 ---
+title: inline vs global css in om layout code
 layout: post
 ---
 I'm working on designing a simple [ClojureScript basketball tournament bracket](github.com/stijlist/threev)

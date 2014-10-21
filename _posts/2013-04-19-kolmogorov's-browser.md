@@ -1,4 +1,5 @@
 ---
+title: kolmogorov's browser
 layout: post
 ---
 _(or, we need to build the Minix to WebKit's Linux, and here's why)_

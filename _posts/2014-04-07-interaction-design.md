@@ -1,4 +1,5 @@
 ---
+title: interaction design
 layout: post
 ---
 I've been reading and re-reading Bret Victor's "A Brief Rant on the Future of

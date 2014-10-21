@@ -1,4 +1,5 @@
 ---
+title: prior art ii
 layout: post
 ---
 Remember the system I was daydreaming about in "[dynabook software](http://somethingdoneright.net/post/80773691482/dynabook-software)”? What's the real difference between it and the Lively Kernel? For one, the interfaces between objects in the Lively Kernel are traditional software interfaces (where data flow is concerned). Objects pass messages to each other, but I’d expect that users would have to be programmers to make a Squeak object capable of consuming any kind of meaningful data. In my daydream, by pattern matching on the shape of data received, we get structured data (EDN) that still adheres to a universal interface and enables dynamic pipelines of components, like Unix, without having to resort to unstructured text. 

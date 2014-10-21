@@ -1,4 +1,5 @@
 ---
+title: cobble's knot
 layout: post
 ---
 Note: this essay may not be of much use without more links to necessary contextual information

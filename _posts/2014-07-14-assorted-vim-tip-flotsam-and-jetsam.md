@@ -1,4 +1,5 @@
 ---
+title: assorted vim tip flotsam and jetsam
 layout: post
 ---
 How does one get started with Vim? 

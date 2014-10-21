@@ -1,4 +1,5 @@
 ---
+title: out of the tar pit
 layout: post
 ---
 I was re-reading ["Out of the Tar Pit"](http://shaffner.us/cs/papers/tarpit.pdf) earlier last week. It's a paper written
