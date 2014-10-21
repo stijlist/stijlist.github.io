@@ -1,1 +1,0 @@
-School has been insane the past few weeks, but I'm realizing that it would benefit me immensely to spend some time using and understanding Squeak before I start trying to improve upon it. 
