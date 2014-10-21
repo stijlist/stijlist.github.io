@@ -1,3 +1,6 @@
+---
+layout: post
+---
 Bret Victor, in his [links for 2013][1], uses the metaphor of ants on a tree
 branch to talk about how we as an industry
 might be moving forward in the little picture, but be moving towards a dead end

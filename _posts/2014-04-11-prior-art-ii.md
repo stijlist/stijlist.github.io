@@ -1,3 +1,6 @@
+---
+layout: post
+---
 Remember the system I was daydreaming about in "[dynabook software](http://somethingdoneright.net/post/80773691482/dynabook-software)”? What's the real difference between it and the Lively Kernel? For one, the interfaces between objects in the Lively Kernel are traditional software interfaces (where data flow is concerned). Objects pass messages to each other, but I’d expect that users would have to be programmers to make a Squeak object capable of consuming any kind of meaningful data. In my daydream, by pattern matching on the shape of data received, we get structured data (EDN) that still adheres to a universal interface and enables dynamic pipelines of components, like Unix, without having to resort to unstructured text. 
 
 What else? It would be designed for touch, which I think fosters direct manipulation and spatial representations of data in a way that designing for a mouse cursor can't (I'll have to elucidate my reasoning on this later). It should allow you to visualize data flow through the system and manipulate the connections between components without necessarily editing text.

@@ -1,3 +1,6 @@
+---
+layout: post
+---
 I was re-reading ["Out of the Tar Pit"](http://shaffner.us/cs/papers/tarpit.pdf) earlier last week. It's a paper written
 by Ben Mosely and Peter Marks, discussing the complexity of software and
 approaches to software engineering that attempt to reduce software to its essential

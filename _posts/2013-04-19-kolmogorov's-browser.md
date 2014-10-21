@@ -1,3 +1,6 @@
+---
+layout: post
+---
 _(or, we need to build the Minix to WebKit's Linux, and here's why)_
 
 **TL;DR**: Webkit is insanely complicated. We need an educational system like Minix

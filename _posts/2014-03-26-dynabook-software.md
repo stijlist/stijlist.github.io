@@ -1,3 +1,6 @@
+---
+layout: post
+---
 I saw [David Nolen's wonderful Clojure West talk today][1], and it inspired me immensely.  Specifically, the two demos he showed towards the end: [zenrise, an
 interface builder][2] by [@sgrove][3], and [session, a Mathematica-like
 notebook][4] by [@kovasb][5], both written in [ClojureScript](https://github.com/clojure/clojurescript) using [Om][6].  

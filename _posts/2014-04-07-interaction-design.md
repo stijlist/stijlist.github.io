@@ -1,3 +1,6 @@
+---
+layout: post
+---
 I've been reading and re-reading Bret Victor's "A Brief Rant on the Future of
 Interaction Design" recently, and thinking about how we can provide the kind of
 tactile feedback he espouses as ideal for human physiology. Yesterday,

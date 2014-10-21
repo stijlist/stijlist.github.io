@@ -1,3 +1,6 @@
+---
+layout: post
+---
 1. take notes. notes are facts, quotes, or ideas, often compiled into simple bulleted lists. having references to the source material is invaluable. [markdown](http://www.daringfireball.net/markdown) is great for this.
 2. comment on the notes and re-sequence them and the associated comments into a sensible progression of ideas.
 3. take the expanded notes and comments and weave them into a cohesive narrative.

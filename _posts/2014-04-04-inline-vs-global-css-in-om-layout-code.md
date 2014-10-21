@@ -1,3 +1,6 @@
+---
+layout: post
+---
 I'm working on designing a simple [ClojureScript basketball tournament bracket](github.com/stijlist/threev)
 as my first project in Om. One of the interesting questions I've come across is
 where it's best to define my CSS. When I'm calculating layout attributes in

@@ -1,3 +1,6 @@
+---
+layout: post
+---
 How does one get started with Vim? 
 
 I've been asked this three separate times so far this Hacker School batch, so for anyone

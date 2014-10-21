@@ -1,3 +1,6 @@
+---
+layout: post
+---
 Note: this essay may not be of much use without more links to necessary contextual information
 
 I occasionally find myself thinking about my goals as a software engineer, and my thoughts continually return to the original iPhone. It still astonishes me that something created under incredibly onerous constraints could  transform the way humans in the first world relate to technology. I find myself also thinking about how difficult it must have been, and how [fragile](http://www.nytimes.com/2013/10/06/magazine/and-then-steve-said-let-there-be-an-iphone.html) that process of creation was. Let's put that thought on hold for a second.

@@ -1,3 +1,6 @@
+---
+layout: post
+---
 SO I borked my system on Wednesday (damn you, Yosemite installer!) and spent the majority of Thursday and Friday yak-shaving, but by the end, I'd actually ended up doing some valuable work. This blog post is just a set of notes on the process.
 
 ## reducing the number of programs I use

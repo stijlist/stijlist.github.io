@@ -1,3 +1,6 @@
+---
+layout: post
+---
 Recently, I read [Nine Open Problems for Conjunctive and Boolean Gramars](http://users.utu.fi/aleokh/boolean/nine_open_problems.html). I'm excited that these problems are still open, and I'm thankful that Alex Okhotin took the trouble to compile this list so that relative laypeople like me could start nibbling around the edges of this problem space. If I really wanted to start developing a deep intuition about conjunctive and Boolean grammars, though, where would I begin? 
 
 I think the obvious answer here is reading the literature and playing with some of the examples and ideas myself, but there's one problem with that approach: 'play' is not easily regimented or measured, and when the objective of play is something concrete that only manifests over a long period of time (e.g. deep intuition), I find it difficult to maintain the habit. 

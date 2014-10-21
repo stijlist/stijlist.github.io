@@ -1,3 +1,6 @@
+---
+layout: post
+---
 I had a great talk with Mel Chua (one of our wonderful hacker school residents) last week about learning styles, motivation, and goal-setting. It was illuminating in many ways, but I'll just talk here about one aspect I attempted to put into practice this weekend.
 
 Mel talked about measurable goals as the basis for both deliberate practice and task-scoping, an idea I'd been exposed to before (through Malcolm Gladwell's "Outliers," among other things) and I decided to try and see how much of the work I'd put in to [my iPad IDE](https://www.youtube.com/watch?v=ck5ogFiWGpQ) had paid off in the form of useful iOS development skills. Or, in measurable terms, how quickly could I write an app?
