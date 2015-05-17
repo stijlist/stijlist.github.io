@@ -1,0 +1,341 @@
+read your whole toolchain
+
+I reset my dev environment again. When something breaks in my computer system,
+I want the freedom to fix it as simply and painlessly as possible. Now that
+I've read the source to the dash shell and rlwrap, I feel comfortable with the
+idea that I might one day have to fix bugs or inconsistencies in their
+behavior. `selecta` is the same way. I feel comfortable with the way it works
+and comfortable using it as a general-purpose interface to my other tools.
+
+Realizing this gave me hope. By trading off features for simplicity and
+composability `dash` and `rlwrap` together are smaller than `bash` or even
+`fish`, and there might be other aspects of my toolchain I would be comfortable
+eliminating or trading down.
+
+I came up with a list of important software: 
+
+terminal emulator, shell, interactive search, text editor, programming
+language, formatter, and graphics compositor.
+
+Here's a hypothetical toolchain, making significant tradeoffs of features for
+simplicity:
+
+st: 3594
+dash: 13485
+rlwrap: 7318
+selecta: 818
+ag: 4329
+commonmark.js: 4278
+vim: 340485 (untenable?) 
+cljs: 23934
+weston: 28648
+git: 355018 (equally untenable?)
+firefox: 12 million lines of code
+mesa: a million lines of code (what?)
+linux: 15 million lines of code (jeeeez.)
+
+I'm comfortable living with a browser and git without being able to maintain
+them; I think git has earned my trust and web browsers are just inherently
+extremely complex. Footnote: Hopefully one day I can replace firefox with servo
+(309108 loc) and firefox.html.
+
+I'm not as comfortable not being able to maintain vim; I think I
+would benefit from a smaller editor.
+
+I have to concede the fact that I am forced to trust the linux kernel; it's
+frustrating, but there's no way I can see myself wrangling its complexity
+anytime soon, even if the majority of its code is drivers. Replacing it with a
+simpler kernel doesn't seem useful right now; I do want to use and understand
+Wayland, which depends on it.
+
+Ignoring servo, git, and vim, the hotspots in the above profile are dash,
+clojurescript, and weston, which seems reasonable to me. It makes sense that my
+programming language of choice, shell, and window compositor are the most
+complex programs in my toolchain.
+
+Some potential replacements on the editor front:
+
+neovim: 173893 (still untenable?) 
+edit: 3869 (not a console program? need to port to wayland?)
+
+Maybe an even bigger (possibly sillier) tradeoff would using a line editor in
+conjunction with a formatting tool:
+
+ed: 1534
+clj-fmt: 398
+  rewrite-clj: 3628
+  tools.reader: 1874
+
+I considered `sam`, but it has too many unknown dependencies; maybe I'll
+finish implementing `structexp` and use that for editing code.
+
+Maybe it'll be unusable and frustrating, but maybe not! 
+It'll be a fun experiment.
+
+Another crazy thought: What if I used gitlet.js for version control, instead of git?
+I'd avoid some of the complexity of git while losing some of the features. 
+How would I compose gitlet with other unix tools to get a networked program?
+
+Gitlet operates on "remotes" that are other directories. If you give gitlet a
+networked filesystem, you'll be able to share code across the network.
+
+What about a database?
+Tonsky's `datascript` is under a thousand lines of code. Imagine making it talk to 
+sqlite, one of the best-engineered, best-tested C codebases around. Maybe that'd be
+a useful way to bring the Datomic philosophy to my code.
+
+So now we've got:
+
+st: 3594 (C)
+dash: 13485 (C)
+rlwrap: 7318 (C)
+selecta: 818 (Ruby)
+ag: 4329 (C)
+commonmark.js: 4278 (js)
+cljs: 23934 (cljs)
+weston: 28648 (C)
+gitlet: 958 (js)
+ed: 1534
+clj-fmt: 398
+  rewrite-clj: 3628
+  tools.reader: 1874
+datascript: 866 (cljs)
+rsync: 48534 (C)
+sqlite: 94200 (C)
+servo: 200000 (rust)
+browser.html: 2590 (js)
+
+rsync and sqlite are solving really hard data integrity problems.  It makes
+sense that they'd be hotspots in code complexity. Also, I trust them in a way
+I don't trust most other pieces of complex code; they get a pass in the same
+way git got a pass initially.
+
+I had a hunch that git-annex would be another great example of a codebase in
+the < 10k range, but I was wrong: git-annex is 30928 lines of code. (Does it do
+the same job as rsync?) Additionally, it has a hard dependency on git, making
+the gitlet experiment I was interested in running less of a win if it exists
+alongside git-annex.
+
+What about syncthing? It's an open-source clone of bittorrent sync. How does it work?
+It's about 20kloc sans dependencies.
+While I was thinking about data integrity, I went down the rabbit hole a bit.
+I wanted to know whether codebases that deal with data persistence are larger than
+the other ones in my list of examples.
+
+I took a look a btrfs; the btrfs codebase is 86000 lines of C, about as large
+as sqlite. I wonder what problems sqlite has to deal with that might be equally
+as well dealt with in the filesystem layer. Are there some unifying abstractions
+we're missing out on that need to be reimplemented between the two?
+
+So let's try and split these programs up into categories. Where is most of our
+complexity budget spent? Does the distribution make sense to us?
+
+programmer interface:
+  dash: 13485 (C)
+  rlwrap: 7318 (C)
+  selecta: 818 (Ruby)
+  ag: 4329 (C)
+  gitlet: 958 (js)
+  ed: 1534
+  commonmark.js: 4278 (js)
+  clj-fmt: 398
+    rewrite-clj: 3628
+    tools.reader: 1874
+
+programming system:
+  cljs: 23934 (cljs)
+  datascript: 866 (cljs)
+  sqlite: 94200 (C)
+  spidermonkey: 292000
+
+user interface:
+  st: 3594 (C)
+  weston: 28648 (C)
+  mesa: 1000000 (C)
+  servo: 200000 (rust, C/C++)
+
+durability, synchronization:
+  rsync: 48534 (C)
+  btrfs: 86207 (C)
+
+What about the VM we run javascript and clojurescript on?
+We can use either spidermonkey, v8, or javascriptcore;
+counting the lines of code in each system: 
+v8: 523000 (C++)
+spidermonkey: 292000 (C++)
+javascriptcore: 248000 (C++)
+
+This is pretty interesting; javascriptcore is the smallest (probably because it
+reuses the llvm compiler infrastructure for its most advanced optimizations).
+Spidermonkey is in the same size category, and v8 is twice as large. Since
+spidermonkey is a Servo dependency and v8 is a node dependency, we're pretty
+much stuck with both of them for the short term. Microsoft's work on making the
+Chakra engine embeddable in node will probably be enough to get spidermonkey
+into it as well, though, and then perhaps it won't be necessary to have two js
+engines on the same machine.
+
+Compiler infrastructure is a grim story. Clang and LLVM are the
+state-of-the-art compiler and compiler infrastructure, but they're massive;
+LLVM is 680000 lines of code and clang is another 600000 on top of that.
+There's TinyCC for C which is 35000 lines of code, in the same ballpark as
+ClojureScript. It seems like a reasonable size for an optimizing compiler and
+assembler, but doesn't support C++. LLVM is a requirement for Rust, too.
+
+Another note: every single nontrivial C program seems to also implement its own malloc and realloc.
+
+What if we gave sqlite direct block access, and then mounted it as a FUSE filesystem? Would the obviate the need for btrfs?
+
+Unlikely; many programs still need the block storage abstraction. How does sqlite handle arbitrarily large records? 
+
+In what ways could we change the Unix filesystem API to give looser guarantees? We probably need to keep fsync around. It would be great to maintain some notion of streams, because they're critical to many kinds of software.
+
+Wait, is that true? 
+What kind of software needs streams?
+Right, mapping transformations over arrays of data. Everything needs streams? I'm still fuzzy on this.
+
+Wait, the only unix filesystem api calls I can think of are read, write, fstat, and fsync.
+
+More filesystem questions: how does b-tree layout (sqlite) interact with ssd write and read patterns?
+
+I have a hunch that FUSE is a really useful protocol. What are other useful protocols?
+
+The Datomic API is pretty important, I think.
+On second thought, no; it's the Datomic philosophy that's important.
+
+The architecture of my programming environment:
+
+1. Ref. Linux Kernel Initialization
+2. Write up the architecture of the dash shell
+3. Write up the architecture of TinyCC.
+3. Write up the architecture of ed.
+4. Write up the architecture of find.
+5. Ref. Geoff Greer's writeups on the architecture of ag
+6. Ref. the source code of selecta
+7. Ref. David Nolen's tour of the cljs compiler
+8. Ref. Mary Rose Cook's annotated gitlet source
+9. Ref. Julia Evans' writeup on the architecture of sqlite
+10. Ref. Tonsky's writeup on Datascript
+
+At this point we've got a terminal-only development environment. Wait, crap, I
+forgot to include a javascript VM. I feel like the most reasonable thing to do
+is include one of the big three VMs, but I'm also tempted by order-of-magnitude
+smaller codebases like duktape (45kloc). I'm gonna benchmark clojurescript on
+duktape for fun later.
+
+Here's an interesting note. There are a few minimal but complete language
+implementations I could potentially include: TinyCC (35k)  and Duktape (45k).
+
+In the case of TinyCC and Duktape's, their bigger sibling language
+implementations are at least an order of magnitude bigger (Clang is 680k,
+jsc-v8 are between 250 and 500k). Do optimizations of a language necessitate an
+order of magnitude increase in codebase size?
+
+Anyway, moving on to the graphics stack:
+
+11. Ref. the architecture of wayland
+12. Write up the architecture of weston
+13. Write up the architecture of st
+
+There are two bigger monsters underlying the graphics stack: the drivers for
+a particular graphics architecture (Intel's, for the sake of the conversation,
+as it's fully open source), and Mesa, the linux graphics API.
+
+The Intel graphics codebase contains support for many different wholly separate
+codepaths for each graphics card. It would be interesting to try and see the
+graph of dependencies within the driver to find out how big the codepath 
+actually used by any one particular driver is; I have a hunch that this would
+drop the codebase to a surmountable size that I could actually comprehend.
+
+I have a hunch that a similar trick could be played with the Mesa codebase, but
+haven't done the investigative work required to verify.
+
+Let's revisit some source lines of code counts:
+
+dash: 13485 (C)
+bsd find: 1803 (C)
+selecta: 818 (Ruby)
+ed: 1534
+ag: 4329 (C)
+cljs: 23934 (cljs)
+gitlet: 958 (js)
+weston: 28648 (C)
+st: 3594 (C)
+
+I guess application-level persistence is a separate concern from the rest of the
+programming environment; none of the aforementioned programs use sqlite or anything
+similar. 
+
+datascript: 866 (cljs)
+sqlite: 94200 (C)
+
+(eventually)
+servo: 200000 (rust)
+browser.html: 2590 (js)
+
+I removed rsync, because I wasn't sure what job it did that the combination of
+http/socket transport and checksumming didn't. It might not be worth its
+complexity cost. Ah, speaking of checksumming: we probably need to include
+md5 or the like somewhere in here, though it might just be a library function.
+Compression, too: gzip is critical to many software infrastructures.
+
+I eliminated rlwrap from this list because dash takes a -E flag for emacs style
+interactive edits; we're already paying the complexity cost for that and we
+don't need to pay it twice. We could also remove interactive edit functionality
+from dash, using rlwrap exclusively, though I observed some strange redraw and
+job control problems when using `rlwrap dash` together as a login shell.
+
+Ah, another mistake caught: I forgot to include the Node source code itself; 
+v8 and spidermonkey might not be enough on their own to reliably script the
+system. Then again, who knows? I haven't tried it. Let's check the size of the
+node source:
+
+node: 27687 (C++)
+
+Okay, so a similar cost to the other language runtimes we've seen, but it
+affords us the freedom to do platform-agnostic io and system calls. I think
+this one is probably worth its complexity cost, because I'm not sure what
+scripting unix with the bare v8 or spidermonkey API would be like.
+
+Then again, consider the duktape interpreter: designed to be easily embeddable
+and scriptable from the rest of the system. Maybe designing a simple system
+call layer accessible from cljs wouldn't be such a bad thing if it saved us 27k
+lines of C++ as a dependency? The flip side of this is the fact that node is
+relatively battle-tested at this point. Do I trust myself to write a solid
+system call layer?
+
+Actually, maybe I do. `#include syscall.h` in a C program that reads JavaScript
+source from the filesystem isn't such a high price to pay for comprehensibility
+and the freedom to build higher-level abstractions on top of the syscalls I have
+in ClojureScript. Maybe I could even build a separate API for myself that trades
+off control for simplicity and reliability, along the lines of "rethinking the
+Unix filesystem API" from earlier.
+
+Okay, let's take that (wildly optimistic) last paragraph into account and do some
+rudimentary addition.
+
+tinycc: 61103 (C)
+dash: 13485 (C)
+find: 1803 (C)
+selecta: 818 (Ruby)
+ed: 1534
+ag: 4329 (C)
+duktape: 45319 (C)
+cljs: 23934 (cljs)
+gitlet: 958 (js)
+weston: 28648 (C)
+st: 3594 (C)
+
+total: 185525
+
+Maybe we're getting into tenable territory?  Maybe tinycc and duktape are below
+the level at which I should be thinking. If that's the case, I could easily
+slot in Clang and node, though I remain agnostic for now. Sans those two, we're
+at a completely manageable 79,103 lines of code, not counting tests or docs for
+those codebases that have them.
+
+I see a lot of promise here. There's stranger complications (how are we going to
+handle the web?) but perhaps this is a good place to stop and think.
+
+(eventually)
+servo: 200000 (rust)
+browser.html: 2590 (js)
