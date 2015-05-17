@@ -14,18 +14,17 @@ eliminating or trading down.
 
 I came up with a list of important software: 
 
-terminal emulator, shell, interactive search, text editor, programming
-language, formatter, and graphics compositor.
+terminal emulator, shell, search program, text editor, programming
+language, and graphics compositor.
 
-Here's a hypothetical toolchain, making significant tradeoffs of features for
-simplicity:
+Here's a hypothetical toolchain, omitting many programs I find useful for
+simplicity's sake:
 
 st: 3594
 dash: 13485
 rlwrap: 7318
 selecta: 818
 ag: 4329
-commonmark.js: 4278
 vim: 340485 (untenable?) 
 cljs: 23934
 weston: 28648
@@ -62,9 +61,6 @@ Maybe an even bigger (possibly sillier) tradeoff would using a line editor in
 conjunction with a formatting tool:
 
 ed: 1534
-clj-fmt: 398
-  rewrite-clj: 3628
-  tools.reader: 1874
 
 I considered `sam`, but it has too many unknown dependencies; maybe I'll
 finish implementing `structexp` and use that for editing code.
@@ -91,14 +87,10 @@ dash: 13485 (C)
 rlwrap: 7318 (C)
 selecta: 818 (Ruby)
 ag: 4329 (C)
-commonmark.js: 4278 (js)
 cljs: 23934 (cljs)
 weston: 28648 (C)
 gitlet: 958 (js)
 ed: 1534
-clj-fmt: 398
-  rewrite-clj: 3628
-  tools.reader: 1874
 datascript: 866 (cljs)
 rsync: 48534 (C)
 sqlite: 94200 (C)
@@ -137,10 +129,6 @@ programmer interface:
   ag: 4329 (C)
   gitlet: 958 (js)
   ed: 1534
-  commonmark.js: 4278 (js)
-  clj-fmt: 398
-    rewrite-clj: 3628
-    tools.reader: 1874
 
 programming system:
   cljs: 23934 (cljs)
@@ -183,38 +171,48 @@ assembler, but doesn't support C++. LLVM is a requirement for Rust, too.
 
 Another note: every single nontrivial C program seems to also implement its own malloc and realloc.
 
-What if we gave sqlite direct block access, and then mounted it as a FUSE filesystem? Would the obviate the need for btrfs?
 
-Unlikely; many programs still need the block storage abstraction. How does sqlite handle arbitrarily large records? 
 
-In what ways could we change the Unix filesystem API to give looser guarantees? We probably need to keep fsync around. It would be great to maintain some notion of streams, because they're critical to many kinds of software.
+### An aside on filesystems
 
-Wait, is that true? 
-What kind of software needs streams?
-Right, mapping transformations over arrays of data. Everything needs streams? I'm still fuzzy on this.
+What if we gave sqlite direct block access, and then mounted it as a FUSE
+filesystem? Would the obviate the need for btrfs?
+
+Unlikely; many programs still need the block storage abstraction. How does
+sqlite handle arbitrarily large records? 
+
+In what ways could we change the Unix filesystem API to give looser guarantees?
+We probably need to keep fsync around. It would be great to maintain some
+notion of streams, because they're critical to many kinds of software.
+
+Wait, is that true?  What kind of software needs streams?  Right, mapping
+transformations over arrays of data. Everything needs streams? I'm still fuzzy
+on this.
 
 Wait, the only unix filesystem api calls I can think of are read, write, fstat, and fsync.
 
-More filesystem questions: how does b-tree layout (sqlite) interact with ssd write and read patterns?
+More filesystem questions: how does b-tree layout (sqlite) interact with ssd
+write and read patterns?
 
-I have a hunch that FUSE is a really useful protocol. What are other useful protocols?
+I have a hunch that FUSE is a really useful protocol. What are other useful
+protocols?
 
-The Datomic API is pretty important, I think.
-On second thought, no; it's the Datomic philosophy that's important.
+The Datomic API is pretty important, I think. On second thought, no; it's the
+Datomic philosophy that's important.
 
-The architecture of my programming environment:
+### The architecture of my programming environment: a hypothetical blog post series
 
-1. Ref. Linux Kernel Initialization
+1. Ref. [Linux Kernel Initialization](http://0xax.gitbooks.io/linux-insides/content/index.html)
 2. Write up the architecture of the dash shell
 3. Write up the architecture of TinyCC.
 3. Write up the architecture of ed.
 4. Write up the architecture of find.
-5. Ref. Geoff Greer's writeups on the architecture of ag
-6. Ref. the source code of selecta
-7. Ref. David Nolen's tour of the cljs compiler
-8. Ref. Mary Rose Cook's annotated gitlet source
-9. Ref. Julia Evans' writeup on the architecture of sqlite
-10. Ref. Tonsky's writeup on Datascript
+5. Geoff Greer's writeups on the architecture of [ag](http://geoff.greer.fm/ag/)
+6. Ref. the source code of [selecta](https://github.com/garybernhardt/selecta/blob/master/selecta)
+7. Ref. David Nolen's [tour of the cljs compiler](https://github.com/swannodette/hello-cljsc/blob/master/src/hello_cljsc/core.clj)
+8. Ref. Mary Rose Cook's [annotated gitlet source](http://gitlet.maryrosecook.com/docs/gitlet.html)
+9. Ref. Julia Evans' writeup on the architecture of sqlite ([part 1](http://jvns.ca/blog/2014/09/27/how-does-sqlite-work-part-1-pages/), [part 2](http://jvns.ca/blog/2014/10/02/how-does-sqlite-work-part-2-btrees/))
+10. Ref. Tonsky's writeup on [Datascript internals](http://tonsky.me/blog/datascript-internals/)
 
 At this point we've got a terminal-only development environment. Wait, crap, I
 forgot to include a javascript VM. I feel like the most reasonable thing to do
