@@ -12,25 +12,56 @@ composability `dash` and `rlwrap` together are smaller than `bash` or even
 `fish`, and there might be other aspects of my toolchain I would be comfortable
 eliminating or trading down.
 
-I came up with a list of important software: 
+Here's a list of the command-line software I use, sorting by usage:
+  22 which
+  23 set
+  24 chmod
+  26 tmux
+  26 touch
+  31 sudo
+  35 man
+  38 find
+  40 tree
+  46 heroku
+  64 cp
+  78 mkdir
+  88 echo
+ 111 cloc
+ 120 mv
+ 150 ls
+ 153 rm
+ 158 brew
+ 221 ag
+ 263 cat
+ 362 vim
+ 383 cd
+ 948 git
 
-terminal emulator, shell, search program, text editor, programming
-language, and graphics compositor.
+This doesn't jibe with my intuition, but I realized that number of invocations
+is a poor proxy for the usage of a command line program. I only run leiningen
+once for every clojurescript session, for example, even though I rely on
+clojurescript pretty heavily.
+
+All this is running inside a terminal emulator, inside a shell, using a
+graphics compositor, on a kernel. 
+
+It's telling that the thing I use most is git, by a wide margin.
+version control, changing directories, editing text, searching files are
+the most important command line tasks I do.
 
 Here's a hypothetical toolchain, omitting many programs I find useful for
 simplicity's sake:
 
 st: 3594
 dash: 13485
-rlwrap: 7318
 selecta: 818
 ag: 4329
 vim: 340485 (untenable?) 
 cljs: 23934
-weston: 28648
 git: 355018 (equally untenable?)
-firefox: 12 million lines of code
+x11: (something ungodly)
 mesa: a million lines of code (what?)
+firefox: 12 million lines of code (sigh)
 linux: 15 million lines of code (jeeeez.)
 
 I'm comfortable living with a browser and git without being able to maintain
@@ -108,8 +139,6 @@ the same job as rsync?) Additionally, it has a hard dependency on git, making
 the gitlet experiment I was interested in running less of a win if it exists
 alongside git-annex.
 
-What about syncthing? It's an open-source clone of bittorrent sync. How does it work?
-It's about 20kloc sans dependencies.
 While I was thinking about data integrity, I went down the rabbit hole a bit.
 I wanted to know whether codebases that deal with data persistence are larger than
 the other ones in my list of examples.
@@ -170,35 +199,6 @@ ClojureScript. It seems like a reasonable size for an optimizing compiler and
 assembler, but doesn't support C++. LLVM is a requirement for Rust, too.
 
 Another note: every single nontrivial C program seems to also implement its own malloc and realloc.
-
-
-
-### An aside on filesystems
-
-What if we gave sqlite direct block access, and then mounted it as a FUSE
-filesystem? Would the obviate the need for btrfs?
-
-Unlikely; many programs still need the block storage abstraction. How does
-sqlite handle arbitrarily large records? 
-
-In what ways could we change the Unix filesystem API to give looser guarantees?
-We probably need to keep fsync around. It would be great to maintain some
-notion of streams, because they're critical to many kinds of software.
-
-Wait, is that true?  What kind of software needs streams?  Right, mapping
-transformations over arrays of data. Everything needs streams? I'm still fuzzy
-on this.
-
-Wait, the only unix filesystem api calls I can think of are read, write, fstat, and fsync.
-
-More filesystem questions: how does b-tree layout (sqlite) interact with ssd
-write and read patterns?
-
-I have a hunch that FUSE is a really useful protocol. What are other useful
-protocols?
-
-The Datomic API is pretty important, I think. On second thought, no; it's the
-Datomic philosophy that's important.
 
 ### The architecture of my programming environment: a hypothetical blog post series
 
