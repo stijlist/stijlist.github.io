@@ -1,4 +1,4 @@
-"free" to make change
+complexity hotspots
 ---
 
 the worst feeling as a user of a general purpose computer is the sense that
