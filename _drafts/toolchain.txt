@@ -1,16 +1,49 @@
 read your whole toolchain
 
-I reset my dev environment again. When something breaks in my computer system,
-I want the freedom to fix it as simply and painlessly as possible. Now that
-I've read the source to the dash shell and rlwrap, I feel comfortable with the
-idea that I might one day have to fix bugs or inconsistencies in their
-behavior. `selecta` is the same way. I feel comfortable with the way it works
-and comfortable using it as a general-purpose interface to my other tools.
 
-Realizing this gave me hope. By trading off features for simplicity and
-composability `dash` and `rlwrap` together are smaller than `bash` or even
-`fish`, and there might be other aspects of my toolchain I would be comfortable
-eliminating or trading down.
+the worst feeling as a user of a general purpose computer is the sense that
+the computer is getting away from you; the sense that you're no longer in
+control of what's going on; you can't fathom why and don't even understand
+where you would start to try to.
+
+I want to be less susceptible to this feeling; I want to be empowered by
+the technology I use and never get bogged down by breakage in something I can't
+fix. I want to have a sense of mastery over and comfort in the tools that I
+have to use to get my job done.
+
+One of the tools I use frequently is Vim (a tremendously complex program, but
+we'll get to that later). I find the relative simplicity of my Vim setup
+comforting compared to that of an IDE or more complex editor. In it, the
+simplest and most general way to navigate the filesystem is by
+"fuzzy-searching" files, often scoped to the directory that Vim was launched
+in. This functionality isn't built in to Vim, but it's popular enough that
+there are many plugins that purport to provide it. 
+
+The other day, I launched Vim in one of my project directories and typed in
+"layout.css" to open the eponymously named file in the root of the project.
+Bafflingly, my fuzzy search plugin reported "no results." This wasn't
+complicated substring matching spread across word and path boundaries; this
+was a failed match of a literal text string. Okay, I'm a programmer, and this
+program is misbehaving... let's fix it. I jumped to the source of the plugin,
+opened it up to begin debugging, and... wow. I just remembered that a) I don't
+know vimscript and b) vimscript is an ancient, often inscrutable language,
+full of questionable abbreviations and syntax that seemingly grew by
+accretion. To add insult to injury, the plugin is **three thousand lines** of
+the stuff... even if I knew the language, could I track down the bug in a
+reasonable amount of time?
+
+Thoroughly daunted, I gave up, but this episode stuck with me.
+
+After a few weeks of this frustration gnawing at me, I reset my dev
+environment. When something breaks in my computer system, I want the freedom
+to fix it as simply and painlessly as possible. I want to be able to read the
+source to the tools I use day to day and fix bugs or inconsistencies in their
+behavior.  
+
+The more complicated a tool is, the less of a chance I give myself to
+comprehend or repair it when it breaks.
+What aspects of my toolchain would I be comfortable eliminating or "trading
+down" in complexity for simpler tools?
 
 Here's a list of the command-line software I use, sorting by usage:
 $ cat fish_history | grep cmd: | awk '{ print  }' | sort | uniq -c | sort

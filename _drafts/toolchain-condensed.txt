@@ -37,3 +37,5 @@ the stuff... even if I knew the language, could I track down the bug in a
 reasonable amount of time?
 
 Thoroughly daunted, I gave up, but this episode stuck with me.
+
+After a few weeks of this frustration gnawing at me, 
