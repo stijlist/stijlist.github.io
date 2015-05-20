@@ -61,52 +61,44 @@ scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
 
-st: 3594
+linux: 15 million lines of code (jeeeez. still an order-of-magnitude reduction vs OS X.)
+firefox: 12 million lines of code
+mesa: a million lines of code
+vim: 340485
+git: 355018
+btrfs: 86000 
+weston: 28648
+cljs: 23934 (a replacement for scala and ruby, though I can't evade the cost of a javascript runtime)
 dash: 13485
-selecta: 818
+pacman: (todo: cloc this later)
 ag: 4329
-vim: 340485 (untenable?) 
-cljs: 23934
-git: 355018 (equally untenable?)
-x11: (something ungodly)
-mesa: a million lines of code (what?)
-firefox: 12 million lines of code (sigh)
-linux: 15 million lines of code (jeeeez.)
+st: 3594
+selecta: 818
 
-I'm comfortable living with a browser and git without being able to maintain
-them; I think git has earned my trust and web browsers are just inherently
-extremely complex. Footnote: Hopefully one day I can replace firefox with servo
-(309108 loc) and firefox.html.
+Where are the hotspots in this profile?
 
-I'm not as comfortable not being able to maintain vim; I think I
-would benefit from a smaller editor.
+The kernel & the web browser are both on the order of 10^7
+the graphics system is on the order of 10^6
+editing and version controlling files => 10^5
+the filesystem and window compositor => 10^4
+the programming language and shell => a smaller 10^4
+fast file search, terminal emulator => 10^3
+fuzzy text selection => 10^2 (ruby)
+
+Here's the thing: I don't think editing and version controlling files 
+should be in that 10^5 tier. What's a reasonable lower bound for the
+complexity of these tasks?
 
 I have to concede the fact that I am forced to trust the linux kernel; it's
 frustrating, but there's no way I can see myself wrangling its complexity
 anytime soon, even if the majority of its code is drivers. Replacing it with a
 simpler kernel doesn't seem useful right now; I do want to use and understand
-Wayland, which depends on it.
+Wayland and Weston, which depend on it.
 
 Ignoring servo, git, and vim, the hotspots in the above profile are dash,
 clojurescript, and weston, which seems reasonable to me. It makes sense that my
 programming language of choice, shell, and window compositor are the most
 complex programs in my toolchain.
-
-Some potential replacements on the editor front:
-
-neovim: 173893 (still untenable?) 
-edit: 3869 (not a console program? need to port to wayland?)
-
-Maybe an even bigger (possibly sillier) tradeoff would using a line editor in
-conjunction with a formatting tool:
-
-ed: 1534
-
-I considered `sam`, but it has too many unknown dependencies; maybe I'll
-finish implementing `structexp` and use that for editing code.
-
-Maybe it'll be unusable and frustrating, but maybe not! 
-It'll be a fun experiment.
 
 Another crazy thought: What if I used gitlet.js for version control, instead of git?
 I'd avoid some of the complexity of git while losing some of the features. 
