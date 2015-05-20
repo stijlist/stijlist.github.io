@@ -1,5 +1,5 @@
-read your whole toolchain
-
+"free" to make change
+---
 
 the worst feeling as a user of a general purpose computer is the sense that
 the computer is getting away from you; the sense that you're no longer in
@@ -45,58 +45,22 @@ comprehend or repair it when it breaks.
 What aspects of my toolchain would I be comfortable eliminating or "trading
 down" in complexity for simpler tools?
 
-Here's a list of the command-line software I use, sorting by usage:
-$ cat fish_history | grep cmd: | awk '{ print  }' | sort | uniq -c | sort
-  22 which
-  23 set
-  24 chmod
-  26 tmux
-  26 touch
-  31 sudo
-  35 man
-  38 find
-  40 tree
-  46 heroku
-  64 cp
-  78 mkdir
-  88 echo
- 111 cloc
- 120 mv
- 150 ls
- 153 rm
- 158 brew
- 221 ag
- 263 cat
- 362 vim
- 383 cd
- 948 git
+Here's some software I rely on to build programs day-to-day:
 
-This doesn't jibe with my intuition, but I realized that number of invocations
-is a poor proxy for the usage of a command line program. I only run leiningen
-once for every clojurescript session, for example, even though I rely on
-clojurescript pretty heavily.
-
-All this is running inside a terminal emulator, inside a shell, using a
-graphics compositor, on a kernel. 
-
-It's telling that the thing I use most is git, by a wide margin.
-version control, changing directories, editing text, searching files are
-the most important command line tasks I do.
-
-Here's a hypothetical toolchain, omitting many programs I find useful for
-simplicity's sake:
-
-st: 3594
-dash: 13485
-selecta: 818
+Mac OS X: closed-source, 87 million+ lines of code
+Terminal.app: closed-source, unknown complexity
+Safari: Webkit alone is 1.8 million lines of code
+vim: 340485
+git: 355018
+fish: 47866
 ag: 4329
-vim: 340485 (untenable?) 
-cljs: 23934
-git: 355018 (equally untenable?)
-x11: (something ungodly)
-mesa: a million lines of code (what?)
-firefox: 12 million lines of code (sigh)
-linux: 15 million lines of code (jeeeez.)
+selecta: 818
+v8: 523000
+node: 27687
+scala: 172017
+
+Here's a hypothetical list of ways I could "trade down":
+# todo
 
 I'm comfortable living with a browser and git without being able to maintain
 them; I think git has earned my trust and web browsers are just inherently
