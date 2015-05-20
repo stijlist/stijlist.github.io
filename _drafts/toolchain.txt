@@ -13,6 +13,7 @@ composability `dash` and `rlwrap` together are smaller than `bash` or even
 eliminating or trading down.
 
 Here's a list of the command-line software I use, sorting by usage:
+$ cat fish_history | grep cmd: | awk '{ print  }' | sort | uniq -c | sort
   22 which
   23 set
   24 chmod
