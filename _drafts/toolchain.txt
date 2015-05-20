@@ -75,10 +75,12 @@ ag: 4329
 st: 3594
 selecta: 818
 
+  note: many of the older C programs seem to also implement their own malloc and realloc.
+
 Where are the hotspots in this profile?
 
 The kernel & the web browser are both on the order of 10^7
-the graphics system is on the order of 10^6
+the graphics system and programming vm => 10^6
 editing and version controlling files => 10^5
 the filesystem and window compositor => 10^4
 the programming language and shell => a smaller 10^4
@@ -89,117 +91,52 @@ Here's the thing: I don't think editing and version controlling files
 should be in that 10^5 tier. What's a reasonable lower bound for the
 complexity of these tasks?
 
-I have to concede the fact that I am forced to trust the linux kernel; it's
-frustrating, but there's no way I can see myself wrangling its complexity
-anytime soon, even if the majority of its code is drivers. Replacing it with a
-simpler kernel doesn't seem useful right now; I do want to use and understand
-Wayland and Weston, which depend on it.
+Well, Mary wrote gitlet.js as an exploration of the complexity of git. It's a
+svelte 977 lines of javascript, back in the same ballpark as selecta.  And as
+far as text editing is concerned, the simplest text editor that I know of is
+ed, the standard unix editor: 1545 lines of C. Let's slot these in as lower
+bounds. What does our profile look like now?
 
-Ignoring servo, git, and vim, the hotspots in the above profile are dash,
-clojurescript, and weston, which seems reasonable to me. It makes sense that my
-programming language of choice, shell, and window compositor are the most
-complex programs in my toolchain.
-
-Another crazy thought: What if I used gitlet.js for version control, instead of git?
-I'd avoid some of the complexity of git while losing some of the features. 
-How would I compose gitlet with other unix tools to get a networked program?
-
-Gitlet operates on "remotes" that are other directories. If you give gitlet a
-networked filesystem, you'll be able to share code across the network.
-
-What about a database?
-Tonsky's `datascript` is under a thousand lines of code. Imagine making it talk to 
-sqlite, one of the best-engineered, best-tested C codebases around. Maybe that'd be
-a useful way to bring the Datomic philosophy to my code.
-
-So now we've got:
-
-st: 3594 (C)
-dash: 13485 (C)
-rlwrap: 7318 (C)
-selecta: 818 (Ruby)
-ag: 4329 (C)
-cljs: 23934 (cljs)
-weston: 28648 (C)
-gitlet: 958 (js)
-ed: 1534
-datascript: 866 (cljs)
-rsync: 48534 (C)
-sqlite: 94200 (C)
-servo: 200000 (rust)
-browser.html: 2590 (js)
-
-rsync and sqlite are solving really hard data integrity problems.  It makes
-sense that they'd be hotspots in code complexity. Also, I trust them in a way
-I don't trust most other pieces of complex code; they get a pass in the same
-way git got a pass initially.
-
-I had a hunch that git-annex would be another great example of a codebase in
-the < 10k range, but I was wrong: git-annex is 30928 lines of code. (Does it do
-the same job as rsync?) Additionally, it has a hard dependency on git, making
-the gitlet experiment I was interested in running less of a win if it exists
-alongside git-annex.
-
-While I was thinking about data integrity, I went down the rabbit hole a bit.
-I wanted to know whether codebases that deal with data persistence are larger than
-the other ones in my list of examples.
-
-I took a look a btrfs; the btrfs codebase is 86000 lines of C, about as large
-as sqlite. I wonder what problems sqlite has to deal with that might be equally
-as well dealt with in the filesystem layer. Are there some unifying abstractions
-we're missing out on that need to be reimplemented between the two?
+The kernel and web browser => 10^7
+the graphics system and programming vm => 10^6
+the filesystem, window compositor, shell and programming language => 10^5
+search, terminal emulator, fuzzy selecting, editing, and version controlling text => 10^4
 
 So let's try and split these programs up into categories. Where is most of our
 complexity budget spent? Does the distribution make sense to us?
 
 programmer interface:
   dash: 13485 (C)
-  rlwrap: 7318 (C)
   selecta: 818 (Ruby)
   ag: 4329 (C)
+  find: 1803 (C)
   gitlet: 958 (js)
-  ed: 1534
+  ed: 1534 (C)
 
 programming system:
   cljs: 23934 (cljs)
-  datascript: 866 (cljs)
-  sqlite: 94200 (C)
-  spidermonkey: 292000
+  v8, spidermonkey, or jsc: 292000-520000 (C++)
 
 user interface:
   st: 3594 (C)
   weston: 28648 (C)
   mesa: 1000000 (C)
-  servo: 200000 (rust, C/C++)
+  webkit: 2 million (C++)
 
-durability, synchronization:
-  rsync: 48534 (C)
+durability, persistence:
   btrfs: 86207 (C)
 
-What about the VM we run javascript and clojurescript on?
-We can use either spidermonkey, v8, or javascriptcore;
-counting the lines of code in each system: 
-v8: 523000 (C++)
-spidermonkey: 292000 (C++)
-javascriptcore: 248000 (C++)
+Giant chunks of this are related to performant implementations of javascript
+and the web. It's sobering to realize that part of the legacy of ncsa mosaic
+could be this giant complexity burden from html, css, and javascript.
 
-This is pretty interesting; javascriptcore is the smallest (probably because it
-reuses the llvm compiler infrastructure for its most advanced optimizations).
-Spidermonkey is in the same size category, and v8 is twice as large. Since
-spidermonkey is a Servo dependency and v8 is a node dependency, we're pretty
-much stuck with both of them for the short term. Microsoft's work on making the
-Chakra engine embeddable in node will probably be enough to get spidermonkey
-into it as well, though, and then perhaps it won't be necessary to have two js
-engines on the same machine.
-
+Wait a second, though: how are we ever going to compile all of this C?
 Compiler infrastructure is a grim story. Clang and LLVM are the
 state-of-the-art compiler and compiler infrastructure, but they're massive;
 LLVM is 680000 lines of code and clang is another 600000 on top of that.
-There's TinyCC for C which is 35000 lines of code, in the same ballpark as
-ClojureScript. It seems like a reasonable size for an optimizing compiler and
-assembler, but doesn't support C++. LLVM is a requirement for Rust, too.
-
-Another note: every single nontrivial C program seems to also implement its own malloc and realloc.
+There's TinyCC for C which is 61103 lines of code, in that same 10^5 ballpark.
+It seems like a reasonable size for an optimizing compiler and assembler, but
+doesn't support C++. LLVM is a requirement for Rust, too.
 
 ### The architecture of my programming environment: a hypothetical blog post series
 
