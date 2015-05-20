@@ -60,7 +60,18 @@ node: 27687
 scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
-# todo
+
+st: 3594
+dash: 13485
+selecta: 818
+ag: 4329
+vim: 340485 (untenable?) 
+cljs: 23934
+git: 355018 (equally untenable?)
+x11: (something ungodly)
+mesa: a million lines of code (what?)
+firefox: 12 million lines of code (sigh)
+linux: 15 million lines of code (jeeeez.)
 
 I'm comfortable living with a browser and git without being able to maintain
 them; I think git has earned my trust and web browsers are just inherently
