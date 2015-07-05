@@ -3,8 +3,7 @@ complexity hotspots
 
 the worst feeling as a user of a general purpose computer is the sense that
 the computer is getting away from you; the sense that you're no longer in
-control of what's going on; you can't fathom why and don't even understand
-where you would start to try to.
+control of what's going on and don't even understand how you might regain it.
 
 I want to be less susceptible to this feeling; I want to be empowered by
 the technology I use and never get bogged down by breakage in something I can't
@@ -12,8 +11,8 @@ fix. I want to have a sense of mastery over and comfort in the tools that I
 have to use to get my job done.
 
 One of the tools I use frequently is Vim (a tremendously complex program, but
-we'll get to that later). I find the relative simplicity of my Vim setup
-comforting compared to that of an IDE or more complex editor. In it, the
+we'll get to that later. I still find the relative simplicity of my Vim setup
+comforting compared to that of an IDE or more complex editor). In it, the
 simplest and most general way to navigate the filesystem is by
 "fuzzy-searching" files, often scoped to the directory that Vim was launched
 in. This functionality isn't built in to Vim, but it's popular enough that
@@ -61,7 +60,7 @@ scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
 
-linux: 15 million lines of code (jeeeez. still an order-of-magnitude reduction vs OS X.)
+linux: 15 million lines of code (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
 WebKit: 1.8 million lines of code
 mesa: a million lines of code
 vim: 340485
@@ -140,7 +139,7 @@ durability, persistence:
   btrfs: 86207 (C)
 
 Giant chunks of this are related to performant implementations of javascript
-and the web. It's sobering to realize that part of the legacy of ncsa mosaic
+and the web. It's sobering to realize that part of the legacy of the web
 could be this giant complexity burden from html, css, and javascript.
 
 Anyway, moving on to the graphics stack:
@@ -161,11 +160,11 @@ haven't done the investigative work required to verify.
 Maybe we're getting into tenable territory?  Maybe tinycc and duktape are below
 the level at which I should be thinking. If that's the case, I could easily
 slot in Clang and node, though I remain agnostic for now. Sans those two, we're
-at a completely manageable 79,103 lines of code, not counting tests or docs for
-those codebases that have them.
+at a somewhat manageable 79,103 lines of code, not counting tests or docs for
+those codebases that have them (eek).
 
 I see a lot of promise here. There's stranger complications (how are we going to
-handle the web?) but perhaps this is a good place to stop and think.
+comprehend the web?) but perhaps this is a good place to stop and think.
 
 (eventually)
 servo: 200000 (rust)
