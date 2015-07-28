@@ -1,0 +1,72 @@
+The Swift community has recently had an interesting discussion about "when to
+use classes vs when to use structs." The conclusion I think has been most widely
+accepted is "use classes when you need reference semantics, and use structs when
+you need value semantics." Mike Ash wrote a great essay about this. 
+
+"Classes for references, structs for values" is just a small part of a bigger
+picture, though. I'd argue that when you need reference semantics for something
+(the database, the GPU, the server), object-oriented design principles best
+inform how to interact with it, and when you need value semantics for something
+(a user record, a UI scenegraph, a transaction), functional programming
+principles best inform how to transform it.
+
+The lovely thing about this is that it takes "when do I use FP vs OO?" - which
+used to be a very involved decision for me - and boils it down to one concrete
+rule of thumb: 
+
+> If something is a logical singleton, use OO design principles to code for it.
+> If it's not, use FP.
+
+This has clarified some things immensely for me, like "why does the IO monad seem
+like such a friction point in Haskell" or "why does the Actor model seem to work
+so well for programming distributed systems in Erlang but add comparatively little
+value in handling general concurrency in Scala"? It also helped me understand why
+we gain so much from going 100% functional/immutable in spite of the fact that the
+paradigm isn't usually a perfect fit for our entire domain - there are many fewer
+singleton concepts in most problems than non-singleton concepts.
+
+It also corresponds really nicely to "functional core, imperative shell", a
+pithy principle for architecting programs elucidated by Gary Bernhardt. To
+paraphrase him loosely: The things at the boundary of your system (taking input
+from the user, drawing output on the screen, talking to the network) are part
+of the "imperative shell" of your program, an area in which very few decisions
+need to be made, but many processes need to be integrated. The computations at
+the core of your system (making decisions about your domain that determine what
+is input and output) comprise the "functional core": here your domain can be
+modeled immutably, unit tested in isolation, and be manipulated with pure
+functions.  When one "imperative shell" needs to talk to another, it can do so
+by sending it messages that are just immutable values - either on an explicit
+queue as in CSP or an implicit one as in the Actor model. 
+
+The "functional core", the part of your program that you use value semantics 
+and functional programming to model is well served by applying FP dogma: use
+immutable values, transform them with pure functions, maintain as little state
+as possible.
+
+The "imperative shell", the part of your program that you use reference
+semantics and object-oriented programming to model is well served by applying
+OO dogma: tell, don't ask, encapsulate state, invert dependencies, minimize
+API surface area.
+
+I have a theory that value semantics are an indicator of a part of your program
+that are trivially parallel, but not concurrent, and reference semantics indicate
+the inverse, but I'm far from an expert in the area and not bold enough to make
+the claim outright without further investigation.
+
+The final thing I'd like to note: We gain immense power from taking a concept
+that we only knew how to handle with reference semantics and figure out how to
+model it with value semantics. Think about the hype that React.js is getting
+now, not as a JavaScript framework, but _a way to model user interface as a
+value_ - it's changing the way people think about user interface programming
+because of the power value semantics give us. If you've already drank the
+Datomic kool-aid, you can see that it's doing the same thing - taking something
+that used to be modeled as a reference, and enabling us to model it as a value.
+
+In short: 
+
+Use object-oriented programming / reference semantics / mutability / concurrent
+abstractions / integration testing for concepts that are best modeled as
+singletons.
+
+Use functional programming / value semantics / immutability / parallel abstractions
+/ unit testing for everything else.
