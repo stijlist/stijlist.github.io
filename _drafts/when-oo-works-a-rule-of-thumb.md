@@ -90,3 +90,8 @@ Use functional programming / value semantics / immutability / parallel abstracti
 you have a reference to, transform the snapshot as if it's a value, then atomically sync your
 snapshot with the real thing." The tricky part is providing performant implementations for 
 snapshotting & syncing back.
+
+<br> 
+<br>
+
+_Huge thanks to [Justin](https://twitter.com/modernserf), [Tim](https://twitter.com/shelfuu), [Max](https://github.com/cowpig), Noam, Feivel and [Samer](https://samertm.com) for reading drafts of this and providing feedback, to [Julia](https://twitter.com/b0rk) for convincing me to write this up, and to Gary Bernhardt, Rich Hickey, and Rob Pike for their excellent pedagogy._
