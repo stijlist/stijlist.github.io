@@ -58,12 +58,11 @@ programming to model (the "imperative shell") is well served by applying
 OO dogma: tell, don't ask, encapsulate state, separate commands and queries,
 invert dependencies, minimize API surface area, and integration test.
 
-I have a theory that value semantics are an indicator of the parts of your program
-that are [trivially parallel](https://vimeo.com/6624203), but [not concurrent](https://www.youtube.com/watch?v=cN_DpYBzKso),
-and reference semantics indicate
-the inverse, but I'm far from an expert in the area and not bold enough to make
-the claim outright without further investigation. It seems like a good sign that
-[the parallel Haskell runtime uses purity as a criterion for work-stealing 
+I have a theory that value semantics are an indicator of the parts of your
+program that are [trivially parallel](https://vimeo.com/6624203), but [not
+concurrent](https://www.youtube.com/watch?v=cN_DpYBzKso), and reference
+semantics indicate the inverse. It seems like a good sign that [the parallel
+Haskell runtime uses purity as a criterion for work-stealing
 parallelism](http://community.haskell.org/~simonmar/slides/cadarache2012/1%20-%20parallel%20haskell.pdf). 
 
 The final thing I'd like to note: We gain immense power from taking a concept
