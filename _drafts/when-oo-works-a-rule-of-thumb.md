@@ -1,4 +1,4 @@
-when object-orientation works: a rule of thumb
+when OO works: a rule of thumb
 ---
 
 The Swift community has recently had an interesting discussion about "when to
