@@ -1,5 +1,5 @@
 ---
-title: when object-orientation works: a rule of thumb
+title: when object-orientation works (a rule of thumb)
 layout: post
 ---
 The Swift community has recently had an interesting discussion about "when to
