@@ -1,3 +1,6 @@
+when object-orientation works: a rule of thumb
+---
+
 The Swift community has recently had an interesting discussion about "when to
 use classes vs when to use structs." The conclusion I think has been most widely
 accepted is ["use classes when you need reference semantics, and use structs when
