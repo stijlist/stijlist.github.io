@@ -36,7 +36,7 @@ high-performance object-oriented systems like [LMAX](http://martinfowler.com/art
 and seminal books like [Java Concurrency in Practice](http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601).
 
 The value/reference dichotomy also corresponds really nicely to ["functional core, imperative shell"](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell), 
-a principle for architecting programs [invented by Gary Bernhardt](https://www.destroyallsoftware.com/talks/boundaries). To
+a principle for architecting programs [coined and cogently analyzed by Gary Bernhardt](https://www.destroyallsoftware.com/talks/boundaries). To
 paraphrase him loosely: The things at the boundary of your system (taking input
 from the user, drawing output on the screen, talking to the network) are part
 of the "imperative shell" of your program, an area in which very few decisions
