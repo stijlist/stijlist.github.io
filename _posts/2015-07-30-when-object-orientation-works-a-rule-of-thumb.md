@@ -71,7 +71,7 @@ model it with value semantics. Think about the hype that React.js is getting
 now, not as a JavaScript framework, but _a way to [model user interface as a
 value](http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/)_ - it's changing the way people think about user interface programming
 because of the [power value semantics give us](https://www.youtube.com/watch?v=xsSnOQynTHs).
-If you've already drank [the Datomic kool-aid](http://www.infoq.com/presentations/Deconstructing-Database),
+If you've already drunk [the Datomic kool-aid](http://www.infoq.com/presentations/Deconstructing-Database),
 you can see that it's doing the same thing - taking the database, something
 that used to be modeled as a reference, and enabling us to [model it as a value](http://www.infoq.com/presentations/Datomic-Database-Value) &sup1;. 
 
