@@ -18,7 +18,7 @@ The lovely thing about this is that it takes "when do I use FP vs OO?" - which
 used to be a very involved decision for me - and boils it down to one concrete
 rule of thumb: 
 
-* If something must be modeled as a singleton, use OO design principles to code for it. If it's not, use FP.
+* If something must be modeled as a "logical singleton"&sup1;, use OO design principles to code for it. If it's not, use FP.
 
 This has clarified some things immensely for me, like "why does the IO monad seem
 like such a friction point in Haskell?" (sockets and files are singletons!) or 
@@ -73,7 +73,7 @@ value](http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/)_ 
 because of the [power value semantics give us](https://www.youtube.com/watch?v=xsSnOQynTHs).
 If you've already drunk [the Datomic kool-aid](http://www.infoq.com/presentations/Deconstructing-Database),
 you can see that it's doing the same thing - taking the database, something
-that used to be modeled as a reference, and enabling us to [model it as a value](http://www.infoq.com/presentations/Datomic-Database-Value) &sup1;. 
+that used to be modeled as a reference, and enabling us to [model it as a value](http://www.infoq.com/presentations/Datomic-Database-Value) &sup2;. 
 
 In short: 
 
@@ -89,10 +89,18 @@ Use functional programming / value semantics / immutability / parallel abstracti
 
 --- 
 
-&sup1; React and Datomic hint at a general strategy for doing this: take a snapshot of the thing
-you have a reference to, transform the snapshot as if it's a value, then atomically sync your
-snapshot with the real thing. The tricky part is providing performant implementations for 
-snapshotting & syncing back.
+&sup1; What do I mean by "logical singleton"? Something is a "logical
+singleton" if, when you make changes to it, every other part of the program can
+see that change - you don't have control of its scope (irrespective of whether
+you actually used the "Singleton Pattern"). Mutating it in one place mutates it
+everywhere - think writing to a file, blitting pixels to the screen, or
+applying a transaction to the database.
+
+&sup2; React and Datomic hint at a general strategy for doing this: take a
+snapshot of the thing you have a reference to, transform the snapshot as if
+it's a value, then atomically sync your snapshot with the real thing. The
+tricky part is providing performant implementations for snapshotting & syncing
+back.
 
 <br>
 <br>
