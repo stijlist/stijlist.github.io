@@ -12,4 +12,8 @@ layout: default
     {{ content }}
   </article>
 
+  <script type="text/javascript" src="vanity.js">
+  <script type="text/javascript">
+    window.Vanity({{ vanity-server }}).incrementKey({{ page.title }});
+  </script>
 </div>

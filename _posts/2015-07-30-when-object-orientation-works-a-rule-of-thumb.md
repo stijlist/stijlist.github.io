@@ -107,22 +107,3 @@ back.
 
 _Huge thanks to [Justin](https://twitter.com/modernserf), [Tim](https://twitter.com/shelfuu), [Max](https://github.com/cowpig), Noam, Feivel and [Samer](https://samertm.com) for reading drafts of this and providing feedback, to [Julia](https://twitter.com/b0rk) for convincing me to write this up, and to Gary Bernhardt, Rich Hickey, and Rob Pike for their excellent pedagogy._
 
-<script>
-var request = new XMLHttpRequest();
-request.open('GET', 'https://quiet-reef-9983.herokuapp.com', true);
-
-request.onload = function() {
-  if (request.status >= 200 && request.status < 400) {
-    // Success!
-    console.log(request.responseText);
-  } else {
-    console.log("Goofed somehow.");
-  }
-};
-
-request.onerror = function() {
-  console.log("Hit `onerror`");
-};
-
-request.send();
-</script>
