@@ -1,0 +1,23 @@
+"Object-oriented" and "functional" programming styles have often been cast as
+opposing, but "polymorphism and late-binding" (the definition of
+object-oriented programming) does not preclude "programming without side
+effects" (the definition of functional programming). How do these styles of
+program design complement each other in the small and in the large?
+
+for data that can't be snapshotted and synchronized efficiently you must use
+reference semantics, which imply:
+=> mutability 
+=> concurrent (as opposed to parallel) abstractions 
+=> integration testing 
+=> small, specific, opaque interfaces with little surface area (cf posix file api?) 
+=> late-binding, dynamic, "framework" code
+
+for everything else, you can use value semantics, which imply:
+=> immutability 
+=> parallel (as opposed to concurrent) abstractions 
+=> unit testing 
+=> large, general, transparent interfaces with lots of surface area (cf clojure collections) 
+=> early-binding, static, "library" code
+
+
+ex. pervasive defensive copying
