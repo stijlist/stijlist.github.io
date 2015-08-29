@@ -12,8 +12,8 @@ layout: default
     {{ content }}
   </article>
 
-  <script type="text/javascript" src="vanity.js">
+  <script type="text/javascript" src="/js/vanity/client.js"></script>
   <script type="text/javascript">
-    window.Vanity({{ vanity-server }}).incrementKey({{ page.title }});
+    window.Vanity("{{ site.vanity_url }}").incrementKey("{{ page.id }}");
   </script>
 </div>
