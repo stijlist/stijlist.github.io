@@ -2,7 +2,7 @@
 title: Something Done Right
 email: bert@somethingdoneright.net
 description: > # this means to ignore newlines until "baseurl:"
-  Bert Muthalaly's weblog, re: aspirational invisible machines
+  Bert Muthalaly's weblog
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://somethingdoneright.net" # the base hostname & protocol for your site
 twitter_username: stijlist
