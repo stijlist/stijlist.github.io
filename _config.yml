@@ -7,6 +7,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://somethingdoneright.net" # the base hostname & protocol for your site
 twitter_username: stijlist
 github_username:  stijlist
+vanity_url: http://127.0.0.1:8000
 
 # Build settings
 markdown: kramdown
