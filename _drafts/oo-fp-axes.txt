@@ -4,8 +4,8 @@ object-oriented programming) does not preclude "programming without side
 effects" (the definition of functional programming). How do these styles of
 program design complement each other in the small and in the large?
 
-for data that can't be snapshotted and synchronized efficiently you must use
-reference semantics, which imply:
+for data (which has scope that you can't control) that can't be snapshotted and
+synchronized efficiently you must use reference semantics, which imply:
 => mutability 
 => concurrent (as opposed to parallel) abstractions 
 => integration testing 
@@ -19,5 +19,19 @@ for everything else, you can use value semantics, which imply:
 => large, general, transparent interfaces with lots of surface area (cf clojure collections) 
 => early-binding, static, "library" code
 
+reference semantics are about scope
+there's data from the outside world whose scope you don't control
+as object oriented programmers, we know this! ex. pervasive defensive copying
 
-ex. pervasive defensive copying
+oo is about interfaces - late-binding meaning "the invocation of a procedure
+without knowing what code will be called at runtime". whether explicit (Java)
+or implicit (Python) the idea of having a common "interface" to a group of
+objects is key to making this work.
+
+objects are inevitable because having some structured way of doing indirection
+& late binding is necessary for building frameworks
+  - are frameworks necessary?
+    - frameworkless web development
+
+fp is about avoiding side-effects
+
