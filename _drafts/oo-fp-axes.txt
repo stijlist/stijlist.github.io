@@ -45,7 +45,8 @@ transistor density & price?)
 
 note: "mutability" semantics are dependent on your vantage point.
 for the callers of a procedure with no side effects, it doesn't matter if we
-allocate a buffer and write bytes into it.
+allocate a buffer and write bytes into it. we can use the high level example
+of the computing device itself
 
 hiding the state of a procedure, "encapsulation" or "information hiding", was
 critical to reasoning about extremely stateful systems - a way of reducing the
@@ -74,6 +75,7 @@ transparency, which implies:
    - cf clojure collections
    - cf scipy, numpy
 => early-binding, static, "library" code
+   - doesn't matter whether we AOT - don't need to make many runtime decisions
 => amenable to static analyses (type-driven)
 => stateless unit testing
   - cf quickcheck
@@ -141,3 +143,15 @@ of a procedure without knowing what code will be called at runtime". whether
 explicit (Java) or implicit (Python) the idea of having a common "interface" to
 a group of "objects" is key to making this work.
 
+very, very interesting that all of Clojure's (and Lisp/Smalltalk more
+generally) polymorphism + late binding happens in the language implementation
+to permit extensibility 
+- 'how does procedure invocation happen?' 
+- 'what is a function?'
+- 'what is permitted in the syntax' 
+- 'what control structures can we express'
+
+This enables Clojure's 'frameworkless web development' - this is broadly true of
+other dynamic languages too (cf. frameworkless javascript)
+
+vs. C/C++/Java where polymorphism + late binding isn't how the language is implemented
