@@ -20,16 +20,13 @@ https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html
 Hickey (abridged) on the origins of mutability:
 
 > There's a reason we do Place-Oriented Programming because way back in the
-> early days of computers, we had to do Place-Oriented Programming. You had to
-> do it. There wasn't enough capacity to do anything else.  Computer memories
-> were really small. Disks were very small. Everything was very expensive.
-> Those limitations are gone. In the time that I've been doing programming, the
-> capacity of these two things have increased a millionfold.  What other thing
-> in life you know has the same facts about it remain true when the size of
-> something changes by a millionfold. Imagine if your car was a million times
-> bigger than it is. What rules would still apply? What characteristics would
-> still be true? Almost nothing but yet, we're retaining decisions we made when
-> things were much much smaller and moving forward with it.
+> early days of computers, we had to do Place-Oriented Programming. There
+> wasn't enough capacity to do anything else. In the time that I've been doing
+> programming, the capacity of these two things (RAM and disk) have increased a
+> millionfold. Imagine if your car was a million times bigger than it is.
+> What rules would still apply?  What characteristics would still be true?
+> Almost nothing but yet, we're retaining decisions we made when things were
+> much much smaller and moving forward with it.
 
 - The Value of Values, 2012 
 https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValues.md
