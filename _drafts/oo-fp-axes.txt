@@ -5,71 +5,84 @@ opposing, but "polymorphism and late-binding" (the definition of
 object-oriented programming) does not preclude "programming without side
 effects" (the definition of functional programming). How do these styles of
 program design complement each other in the small and in the large?
-The new, immutable machine.
+
 
 Dijkstra on the origins of hierarchy:
 
-> Hierarchical systems seem to have the property that something considered as
-> an undivided entity on one level, is considered as a composite object on the
-> next lower level of greater detail; as a result the natural grain of space or
-> time that is applicable at each level decreases by an order of magnitude when
-> we shift our attention from one level to the next lower one. We understand
-> walls in terms of bricks, bricks in terms of crystals, crystals in terms of
-> molecules etc. As a result the number of levels that can be distinguished
-> meaningfully in a hierarchical system is kind of proportional to the
-> logarithm of the ratio between the largest and the smallest grain, and
-> therefore, unless this ratio is very large, we cannot expect many levels. In
-> computer programming our basic building block has an associated time grain of
-> less than a microsecond, but our program may take hours of computation time.
 > I do not know of any other technology covering a ratio of 10^10 or more: the
 > computer, by virtue of its fantastic speed, seems to be the first to provide
 > us with an environment where highly hierarchical artefacts are both possible
-> and necessary. This challenge, viz. the confrontation with the programming
-> task, is so unique that this novel experience can teach us a lot about
-> ourselves. It should deepen our understanding of the processes of design and
-> creation, it should give us better control over the task of organizing our
-> thoughts. If it did not do so, to my taste we should not deserve the computer
-> at all!
+> and necessary. 
 
-Hickey on the origins of mutability:
+- The Humble Programmer, 1972 
+https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html
+
+Hickey (abridged) on the origins of mutability:
 
 > There's a reason we do Place-Oriented Programming because way back in the
-> early days of computers, we had to do Place-Oriented Programming. I saw Guy
-> Steele give a great talk where he was talking about working, you know,
-> building these systems on a computer that had four kilowords of memory. In
-> every piece of memory, you knew the address, you knew the even number
-> addresses starting at 2000 were used for jump table and these other addresses
-> over here where used for data, and other parts of the addresses were used for
-> code. Sometimes they were used for more than one thing because you knew, like
-> right now, no one's using this for codes so we can use it for data and vice
-> versa. You had to do it. There wasn't enough capacity to do anything else.
-> Computer memories were really small. Disks were very small. Everything was
-> very expensive. So we adopted an approach to programming that was based
-> around the manipulation of places. It totally made sense. And the keyword
-> there, the key aspect to that is it made sense. It used to make sense. Those
-> limitations are gone. In the time that I've been doing programming, the
-> capacity of these two things have increased a millionfold. A millionfold.
-> What other thing in life you know has the same facts about it remain true
-> when the size of something changes by a millionfold. Imagine if your car was
-> a million times bigger than it is. What rules would still apply? What
-> characteristics would still be true? Almost nothing but yet, we're retaining
-> decisions we made when things were much much smaller and moving forward with
-> it.
+> early days of computers, we had to do Place-Oriented Programming. You had to
+> do it. There wasn't enough capacity to do anything else.  Computer memories
+> were really small. Disks were very small. Everything was very expensive.
+> Those limitations are gone. In the time that I've been doing programming, the
+> capacity of these two things have increased a millionfold.  What other thing
+> in life you know has the same facts about it remain true when the size of
+> something changes by a millionfold. Imagine if your car was a million times
+> bigger than it is. What rules would still apply? What characteristics would
+> still be true? Almost nothing but yet, we're retaining decisions we made when
+> things were much much smaller and moving forward with it.
 
+- The Value of Values, 2012 
+https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValues.md
+
+
+thesis: the exponential increase in the speed and memory capacity of computers
+enables immutability / referential transparency, which enable less hierarchical
+programming artefacts
 
 when programming began, we had to do place-oriented programming - shared
-mutable state was essential.
+mutable state was essential. it's no longer essential. (anecdote? graph of
+transistor density & price?)
 
-hiding the state of a procedure, a design principle known as encapsulation, was
-critical to reasoning about extremely stateful systems - a way of marginally
-reducing the amount of state sharing
+note: "mutability" semantics are dependent on your vantage point.
+for the callers of a procedure with no side effects, it doesn't matter if we
+allocate a buffer and write bytes into it.
 
-now we have a choice: do we share? do we mutate?
+hiding the state of a procedure, "encapsulation" or "information hiding", was
+critical to reasoning about extremely stateful systems - a way of reducing the
+amount of state sharing between parent and child nodes
+  (the Design of Systems Programs - book 1970, and 'on the criteria to be used
+   in decomposing systems into modules' - paper 1972)
+
+now we have a choice: do we share? do we mutate? when to do which?
 
 we can use immutable data structures and copy-on-write procedures to share
-without mutating, and mutating without sharing doesn't break referential
+without mutating. mutating without sharing doesn't break referential
 transparency, so the procedures can still be considered pure. 
 
+for sharing without mutating or mutating without sharing, you have referential
+transparency, which implies:
+=> immutability (copy-on-write procedures)
+   - why? sharing without mutating requires it
+=> parallel (without necessitating concurrent) abstractions
+   - cf. fork-join
+   - cf. par monad + spark pools
+   - why? procedures that are referentially transparent don't care how they're
+     called, don't need to cooperate or coordinate with other procedures for 
+     invocation. coordination is expensive in terms of computer time (slow) 
+     and programmer time (hard to understand).
+=> large, general, transparent interfaces with lots of surface area 
+   - cf clojure collections
+   - cf scipy, numpy
+=> early-binding, static, "library" code
+=> amenable to static analyses (type-driven)
+=> stateless unit testing
+  - cf quickcheck
+  - cf boundaries
+  - talk about linear / superlinear test suite runtime growth
+=> very little high-level organization required
+  - cf Joe Armstrong's intuition on global scope for all functions
+=> encapsulation isn't as important
+  - cf Hoogle
 
 when mutating *and* sharing, though, you need to think about the semantics of a
 shared mutable reference - you're back to the principles that guided us during
@@ -81,10 +94,12 @@ shared mutable reference =>
      - examples of oo principles serving this goal
 => concurrent (as opposed to parallel) abstractions 
    - why? heterogeneity and doing many different things at once - each state-bundle
-     can require a different procedure to manage it
+     can require a different procedure to manage it - concurrency is about coordinating
+     heterogenous processes
 => integration testing 
    - why? the complexity lies in the interleaving / overlaying of many procedures onto
      the same data - you must test that interleaving
+   - talk about 2^N state space explosion
 => "framework" code
    - why? the integration of many different parts is extremely difficult at scale because
      of the effects of state - it's more effective to try and get the high-level organization
@@ -97,6 +112,9 @@ shared mutable reference =>
      code without knowing anything specific about what kind of 'purposeful' code we'll write
 => dynamism
    - why? enabling late-binding
+     cf. "why objects are inevitable": objects were inevitable because having
+     some structured way of doing dynamism, indirection & late binding is
+     necessary for building frameworks
 => needs interactive development (inspection of state, repl-driven, live-coding)
    - why? state progression is key, the state space is huge, ad-hoc reasoning and
      observation needs to be cheap!
@@ -111,43 +129,15 @@ shared mutable reference =>
      possible when it's mutating its parent's scope
 
 
-for sharing without mutating or mutating without sharing, you have referential
-transparency, which imply:
-=> and you can use value semantics
-=> referential transparency
-=> immutability 
-=> parallel (as opposed to concurrent) abstractions 
-=> unit testing 
-=> large, general, transparent interfaces with lots of surface area (cf clojure collections, numeric & scientific code) 
-=> early-binding, static, "library" code
-=> amenable to static analyses (type-driven)
-=> stateless unit testing
-  - cf quickcheck
-  - cf boundaries
-=> very little high-level organization required
-=> encapsulation isn't important
-  - cf Joe Armstrong on global scope for all functions
-  - cf Hoogle
+mutable reference semantics boil down to scope control. there's data from the
+outside world (relative to the procedure or program you're writing) whose scope
+you don't control, and mutations to which you must defend against. 
 
-reference semantics are about scope
-there's data from the outside world whose scope you don't control
-as object oriented programmers, we know this! ex. pervasive defensive copying
+as shared mutable state programmers, we know this! 
+ex. pervasive defensive copying
 
 oo is about interfaces and organization - late-binding meaning "the invocation
 of a procedure without knowing what code will be called at runtime". whether
 explicit (Java) or implicit (Python) the idea of having a common "interface" to
 a group of "objects" is key to making this work.
-
-objects are inevitable because having some structured way of doing indirection
-& late binding is necessary for building frameworks
-  - are frameworks necessary?
-    - frameworkless web development
-
-fp is about avoiding side-effects
-
-
-footnote:
-"mutability" semantics are dependent on your vantage point.
-for the callers of a procedure with no side effects, it doesn't matter if we
-allocate a buffer and write bytes into it.
 
