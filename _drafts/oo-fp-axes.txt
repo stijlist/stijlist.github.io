@@ -154,3 +154,6 @@ vs. C/C++/Java where polymorphism + late binding isn't how the language is imple
 
 Can you have 'frameworkless web development' (for example) in languages without
 language-level extensibility?
+
+Look for static languages with frameworkless web development - maybe Snap in the
+Haskell world?
