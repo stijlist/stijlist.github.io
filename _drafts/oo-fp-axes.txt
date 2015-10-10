@@ -37,7 +37,12 @@ https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfVal
 
 when programming began, we had to do place-oriented programming - shared
 mutable state was essential. it's no longer essential. (anecdote? graph of
-transistor density & price? do we believe Rich?)
+transistor density & price?)
+
+http://prog21.dadgum.com/52.html "Slow languages battle across time"
+http://prog21.dadgum.com/29.html "A spellchecker used to be a major feat of
+software engineering"
+http://prog21.dadgum.com/101.html "Living in the era of infinite computing power"
 
 note: "mutability" semantics are dependent on your vantage point.
 for the callers of a procedure with no side effects, it doesn't matter if we
@@ -49,6 +54,30 @@ critical to reasoning about stateful systems - a way of reducing the amount of
 state sharing between parent and child nodes (cf. the Design of Systems
 Programs - book 1970, and 'on the criteria to be used in decomposing systems
 into modules' - paper 1972)
+
+OK, I read "Designing Systems Programs" - only a few things in there about
+reasoning. They say it's easier to debug ("the system is maintained in modular
+fashion; system errors and deficiencies can be traced to specific system
+modules, thus limiting the scope of detailed error searching"), easier to
+coordinate ("there is no confusion in the intended interface with other system
+modules"), and easier to test in isolation ("At checkout time the integrity of
+the module is tested independently"). I also read "on the criteria to be used
+in decomposing systems into modules" - they contrast two decompositions of the
+same problem mention the single responsibility principle (though not by that
+name) for the first time ("The first [reason to] change [would be] confined to
+one module in both decompositions. For the first decomposition the second
+change would result in changes in every module!").
+
+More quotes from "decomposing systems into modules":
+
+"In discussions of system structure it is easy to confuse the benefits of a good
+decomposition with those of a hierarchical structure."
+
+"We propose instead that one begins with a list of difficult design decisions
+or design decisions which are likely to change. Each module is then designed to
+hide such a decision from the others."
+
+
 
 now we have a choice: do we share? do we mutate? when to do which?
 
@@ -157,3 +186,23 @@ language-level extensibility?
 
 Look for static languages with frameworkless web development - maybe Snap in the
 Haskell world?
+
+
+
+
+
+
+
+
+the scarcity of computer memory (and clockspeed) necessitated shared mutable
+state. shared mutable state makes programming hard. coordinating mutating
+processes is expensive - a lot of care must be put into the hierarchy and
+organization of those processes. frameworks save you a lot of hierarchy and
+organization cost, but they need a way to do structured indirection so that can
+call the code that "you" write. structured indirection => "objects",
+polymorphism, late binding (c.f. "Why Objects Are Inevitable" - Cook)
+
+something changed: computers increased their speed and storage capacity by unimaginable amounts.
+when we can snapshot and synchronize data "quickly enough", we don't have to program with shared mutable state - then the organization of code is not as important because procedures can be referentially transparent, which led to a shift to much flatter program hierarchies, less organization, and a shift away from the need for structured indirection, frameworks, polymorphism, and objects.
+
+(aka the rise of fp)
