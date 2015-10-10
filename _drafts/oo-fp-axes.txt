@@ -33,60 +33,62 @@ Hickey (abridged) on the origins of mutability:
 - The Value of Values, 2012 
 https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValues.md
 
-
 when programming began, we had to do place-oriented programming - shared
-mutable state was essential. it's no longer essential.
-
-http://prog21.dadgum.com/52.html "Slow languages battle across time"
-http://prog21.dadgum.com/29.html "A spellchecker used to be a major feat of
-software engineering"
-http://prog21.dadgum.com/101.html "Living in the era of infinite computing power"
-
-hiding the state of a procedure, "encapsulation" or "information hiding", was
-critical to reasoning about stateful systems - a way of reducing the amount of
-state sharing between parent and child nodes (cf. the Design of Systems
-Programs - book 1970, and 'on the criteria to be used in decomposing systems
-into modules' - paper 1972)
-
-OK, I read "Designing Systems Programs" - only a few things in there about
-reasoning. They say information hiding makes things easier to debug ("the
-system is maintained in modular fashion; system errors and deficiencies can be
-traced to specific system modules, thus limiting the scope of detailed error
-searching"), easier to coordinate ("there is no confusion in the intended
-interface with other system modules"), and easier to test in isolation ("At
-checkout time the integrity of the module is tested independently"). I also
-read "on the criteria to be used in decomposing systems into modules" - they
-contrast two decompositions of the same problem mention the single
-responsibility principle (though not by that name) for the first time ("The
-first [reason to] change [would be] confined to one module in both
-decompositions. For the first decomposition the second change would result in
-changes in every module!").
-
-More quotes from "decomposing systems into modules":
-
-"In discussions of system structure it is easy to confuse the benefits of a good
-decomposition with those of a hierarchical structure."
-
-"We propose instead that one begins with a list of difficult design decisions
-or design decisions which are likely to change. Each module is then designed to
-hide such a decision from the others."
-
-My original assertion is false: people didn't recognize encapsulation as
-critical to reasoning about state in particular - they did recognize it as
-enabling flexibility. 
+mutable state was essential because of the scarcity of places. it's no longer
+essential.
 
 now we have a choice: do we share? do we mutate? when to do which?
 
+when mutating *and* sharing, you need to think about the semantics of a shared
+mutable reference - you're using the principles that guided us during
+place-orientation:
+
+shared mutable reference =>
+=> small, specific, opaque interfaces with little surface area (cf posix file api?) 
+   - why? help us reason about code - fewer places the state comes from
+     - examples of oo principles serving this goal
+=> concurrent (as opposed to parallel) abstractions 
+   - why? heterogeneity and doing many different things at once - each state-bundle
+     can require the composition of different procedure to manage it - concurrency 
+     is about coordinating heterogenous processes
+=> integration testing 
+   - why? the complexity lies in the interleaving / overlaying of many procedures onto
+     the same data - you must test that interleaving
+   - talk about 2^N state space explosion
+=> "framework" code
+   - why? the integration of many different parts is extremely difficult at scale because
+     of the effects of state - it's more effective to try and get the high-level organization
+     right once (remember, the shape of the interleaving is key to the success of the design!)
+     and allow for arbitrary code that fulfills a contract to run at the leaves of the code
+     tree
+=> late-binding
+   - why? we want to get high-level organization right once and not spend the inordinate resources
+     getting it right again - we want the organization code to be able to call the 'purposeful'
+     code without knowing anything specific about what kind of 'purposeful' code we'll write
+=> dynamism
+   - why? enabling late-binding
+     cf. "why objects are inevitable": objects were inevitable because having
+     some structured way of doing dynamism, indirection & late binding is
+     necessary for building frameworks
+=> needs interactive development (inspection of state, repl-driven, live-coding, debuggers)
+   - why? state progression is key, the state space is huge, ad-hoc reasoning and
+     observation needs to be cheap!
+=> high-level organization and hierarchy is critical (program organization is
+   treelike w/ low branching factor)
+   - why?
+=> encapsulation is critical
+   - why? it's necessary to understand the whole system - any subtree can break
+     an invariant that's relied on by any other subtree - hopefully not but it's
+     possible when it's mutating something accessible from its parent's scope
+
 we can use immutable data structures and copy-on-write procedures to share
-without mutating. mutating without sharing doesn't break referential
-transparency, so the procedures can still be considered pure. 
+without mutating, and we can use a system of ownership to mutate without sharing.
 
 for sharing without mutating or mutating without sharing, you have referential
 transparency, which implies:
-=> immutability (copy-on-write procedures)
-   - why? sharing without mutating requires it
+=> immutability or ownership (copy-on-write procedures)
 => parallel (without necessitating concurrent) abstractions
-   - cf. fork-join
+   - cf. java fork-join
    - cf. par monad + spark pools
    - why? procedures that are referentially transparent don't care how they're
      called, don't need to cooperate or coordinate with other procedures for 
@@ -107,63 +109,6 @@ transparency, which implies:
 => encapsulation isn't as important
   - cf Hoogle
 
-when mutating *and* sharing, though, you need to think about the semantics of a
-shared mutable reference - you're back to the principles that guided us during
-place-orientation:
-
-shared mutable reference =>
-=> small, specific, opaque interfaces with little surface area (cf posix file api?) 
-   - why? help us reason about code - fewer places the state comes from
-     - examples of oo principles serving this goal
-=> concurrent (as opposed to parallel) abstractions 
-   - why? heterogeneity and doing many different things at once - each state-bundle
-     can require a different procedure to manage it - concurrency is about coordinating
-     heterogenous processes
-=> integration testing 
-   - why? the complexity lies in the interleaving / overlaying of many procedures onto
-     the same data - you must test that interleaving
-   - talk about 2^N state space explosion
-=> "framework" code
-   - why? the integration of many different parts is extremely difficult at scale because
-     of the effects of state - it's more effective to try and get the high-level organization
-     right once (remember, the shape of the interleaving is key to the success of the design!)
-     and allow for arbitrary code that fulfills a contract to run at the leaves of the code
-     tree
-=> late-binding
-   - why? we want to get high-level organization right once and not spend the inordinate resources
-     getting it right again - we want the organization code to be able to call the 'purposeful'
-     code without knowing anything specific about what kind of 'purposeful' code we'll write
-=> dynamism
-   - why? enabling late-binding
-     cf. "why objects are inevitable": objects were inevitable because having
-     some structured way of doing dynamism, indirection & late binding is
-     necessary for building frameworks
-=> needs interactive development (inspection of state, repl-driven, live-coding)
-   - why? state progression is key, the state space is huge, ad-hoc reasoning and
-     observation needs to be cheap!
-=> high-level organization and hierarchy is critical (program organization is
-   treelike w/ low branching factor)
-   - why? it's necessary to reason about the whole thing together, so breaking
-     parts of it up into smaller pieces with agreed-upon interfaces gives you
-     some hope of reasoning about parts
-=> encapsulation is critical
-   - why? it's necessary to understand the whole system - any subtree can break
-     an invariant that's relied on by any other subtree - hopefully not but it's
-     possible when it's mutating its parent's scope
-
-
-mutable reference semantics boil down to scope control. there's data from the
-outside world (relative to the procedure or program you're writing) whose scope
-you don't control, and mutations to which you must defend against. 
-
-as shared mutable state programmers, we know this! 
-ex. pervasive defensive copying
-
-oo is about interfaces and organization - late-binding meaning "the invocation
-of a procedure without knowing what code will be called at runtime". whether
-explicit (Java) or implicit (Python) the idea of having a common "interface" to
-a group of "objects" is key to making this work.
-
 very, very interesting that all of Clojure's (and Lisp/Smalltalk/dynamic
 languages more generally) polymorphism + late binding happens in the language
 implementation to permit extensibility 
@@ -173,7 +118,10 @@ implementation to permit extensibility
 - 'what control structures can we express'
 
 This enables Clojure's 'frameworkless web development' - this is broadly true of
-other dynamic languages too (cf. frameworkless javascript)
+other dynamic languages, because the polymorphism you need to express is inherent
+in the language. (cf. frameworkless javascript, microframeworks in Ruby, etc.)
+
+possible counterexample: Java and Dropwizard?
 
 vs. C/C++/Java where polymorphism + late binding isn't how the language is implemented
 
@@ -183,13 +131,6 @@ language-level extensibility?
 Look for static languages with frameworkless web development - maybe Snap in the
 Haskell world?
 
-
-
-
-
-
-
-
 the scarcity of computer memory (and clockspeed) necessitated shared mutable
 state. shared mutable state makes programming hard. coordinating mutating
 processes is expensive - a lot of care must be put into the hierarchy and
@@ -198,7 +139,10 @@ organization cost, but they need a way to do structured indirection so that can
 call the code that "you" write. structured indirection => "objects",
 polymorphism, late binding (c.f. "Why Objects Are Inevitable" - Cook)
 
-something changed: computers increased their speed and storage capacity by unimaginable amounts.
-when we can snapshot and synchronize data "quickly enough", we don't have to program with shared mutable state - then the organization of code is not as important because procedures can be referentially transparent, which led to a shift to much flatter program hierarchies, less organization, and a shift away from the need for structured indirection, frameworks, polymorphism, and objects.
-
-(aka the rise of fp)
+something changed: computers increased their speed and storage capacity by
+unimaginable amounts. when we can snapshot and synchronize data "quickly
+enough", we don't have to program with shared mutable state - the organization
+of code is not as important because procedures can be referentially
+transparent, which led to a shift to much flatter program hierarchies, less
+organization, and a shift away from the need for structured indirection,
+frameworks, polymorphism, and objects.
