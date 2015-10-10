@@ -1,5 +1,3 @@
-two kinds
-
 "Object-oriented" and "functional" programming styles have often been cast as
 opposing, but "polymorphism and late-binding" (the definition of
 object-oriented programming) does not preclude "programming without side
@@ -7,8 +5,9 @@ effects" (the definition of functional programming). How do these styles of
 program design complement each other in the small and in the large?
 
 thesis: the exponential increase in the speed and memory capacity of computers
-enables immutability / referential transparency, which enable less hierarchical
-programming artefacts
+enables programming using immutability & referential transparency, which reduces
+the primacy of frameworks (and thereby late-binding and objects) to everyday
+programming practice
 
 Dijkstra on the origins of hierarchy:
 
@@ -36,18 +35,12 @@ https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfVal
 
 
 when programming began, we had to do place-oriented programming - shared
-mutable state was essential. it's no longer essential. (anecdote? graph of
-transistor density & price?)
+mutable state was essential. it's no longer essential.
 
 http://prog21.dadgum.com/52.html "Slow languages battle across time"
 http://prog21.dadgum.com/29.html "A spellchecker used to be a major feat of
 software engineering"
 http://prog21.dadgum.com/101.html "Living in the era of infinite computing power"
-
-note: "mutability" semantics are dependent on your vantage point.
-for the callers of a procedure with no side effects, it doesn't matter if we
-allocate a buffer and write bytes into it. we can use the high level example
-of the computing device itself
 
 hiding the state of a procedure, "encapsulation" or "information hiding", was
 critical to reasoning about stateful systems - a way of reducing the amount of
@@ -56,17 +49,18 @@ Programs - book 1970, and 'on the criteria to be used in decomposing systems
 into modules' - paper 1972)
 
 OK, I read "Designing Systems Programs" - only a few things in there about
-reasoning. They say it's easier to debug ("the system is maintained in modular
-fashion; system errors and deficiencies can be traced to specific system
-modules, thus limiting the scope of detailed error searching"), easier to
-coordinate ("there is no confusion in the intended interface with other system
-modules"), and easier to test in isolation ("At checkout time the integrity of
-the module is tested independently"). I also read "on the criteria to be used
-in decomposing systems into modules" - they contrast two decompositions of the
-same problem mention the single responsibility principle (though not by that
-name) for the first time ("The first [reason to] change [would be] confined to
-one module in both decompositions. For the first decomposition the second
-change would result in changes in every module!").
+reasoning. They say information hiding makes things easier to debug ("the
+system is maintained in modular fashion; system errors and deficiencies can be
+traced to specific system modules, thus limiting the scope of detailed error
+searching"), easier to coordinate ("there is no confusion in the intended
+interface with other system modules"), and easier to test in isolation ("At
+checkout time the integrity of the module is tested independently"). I also
+read "on the criteria to be used in decomposing systems into modules" - they
+contrast two decompositions of the same problem mention the single
+responsibility principle (though not by that name) for the first time ("The
+first [reason to] change [would be] confined to one module in both
+decompositions. For the first decomposition the second change would result in
+changes in every module!").
 
 More quotes from "decomposing systems into modules":
 
@@ -77,7 +71,9 @@ decomposition with those of a hierarchical structure."
 or design decisions which are likely to change. Each module is then designed to
 hide such a decision from the others."
 
-
+My original assertion is false: people didn't recognize encapsulation as
+critical to reasoning about state in particular - they did recognize it as
+enabling flexibility. 
 
 now we have a choice: do we share? do we mutate? when to do which?
 
