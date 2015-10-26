@@ -121,7 +121,79 @@ This enables Clojure's 'frameworkless web development' - this is broadly true of
 other dynamic languages, because the polymorphism you need to express is inherent
 in the language. (cf. frameworkless javascript, microframeworks in Ruby, etc.)
 
+aside:
+examples of ClojureScript core language polymorphism:
+
+Fn                      IHash               ISeq
+IAssociative            IIndexed            ISeqable
+IAtom                   IIterable           ISequential
+IChunk                  IKVReduce           ISet
+IChunkedNext            IList               ISorted
+IChunkedSeq             ILookup             IStack
+ICloneable              IMap                ISwap
+ICollection             IMapEntry           ITransientAssociative
+IComparable             IMeta               ITransientCollection
+ICounted                IMultiFn            ITransientMap
+IDeref                  INamed              ITransientSet
+IDerefWithTimeout       INext               ITransientVector
+IEditableCollection     IPending            IVector
+IEmptyableCollection    IPrintWithWriter    IVolatile
+IEncodeClojure          IRecord             IWatchable
+IEncodeJS               IReduce             IWithMeta
+IEquiv                  IReset              IWriter
+IFn                     IReversible
+
+Which of these are important? The ClojureScript crew will probably say "all of them."
+I see a few that seem important, almost all of which are ways to deal with data
+structures or value types:
+
+Atom / Deref
+Comparable
+Counted (constant time)
+Collection (conj)
+Equiv (value comparison)
+IFn
+Hash
+Indexed
+Iterable
+Lookup
+Map
+Meta
+Record
+Reduce
+Sequential
+Set
+
+maybe all the things in the "just use a" series are value types. 
+
+"just use a"
+- function
+- map
+- (reified) message
+
+maybe the interfaces that are most important and general are interfaces that don't have
+to deal with behavior.
+
+possible counterexample: core.async? forkjoin?
+
+
+there are parts of our programs which need late binding and parts that don't - i was
+trying to find commonality between the parts that don't.
+
+imagine a gradually typed language where types are inferred, but you annotate the entry
+points to your program and the part where you take in data from the outside world
+dataflow analysis from security is critical here
+i want to know what the 'minimum viable' set of type annotations is that would lead to
+an inference for every part of your program. 
+i guess the trivial solution would be 'every type we know of inhabits every node of
+this program's dataflow graph'.
+how would we get to the point where we had specialized to "only one type is possible at
+every node?"
+
 possible counterexample: Java and Dropwizard?
+no - in Dropwizard, the framework still calls your code all over the place - orchestration
+was done already, you don't have to write that code, but you do have to conform to the
+Dropwizard interface
 
 vs. C/C++/Java where polymorphism + late binding isn't how the language is implemented
 
