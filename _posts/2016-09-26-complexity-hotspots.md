@@ -66,8 +66,8 @@ Here's some software I rely on to build programs day-to-day:
 
 Here's a hypothetical list of ways I could "trade down":
 
-- OpenBSD: 11473033 (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
-- WebKit: 1.8 million lines of code
+- OpenBSD: 11.5 million lines of code (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
+- "raw" WebKit: 1.8 million lines of code
 - mesa: a million lines of code
 - vim: 340485
 - git: 355018
