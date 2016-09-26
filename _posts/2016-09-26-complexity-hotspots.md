@@ -1,4 +1,6 @@
-complexity hotspots
+---
+title: complexity hotspots
+layout: post
 ---
 
 _note: this was mostly written in July 2015 and promptly forgotten about. I 
@@ -50,17 +52,17 @@ down" in complexity for simpler tools?
 
 Here's some software I rely on to build programs day-to-day:
 
-Mac OS X: closed-source, 87 million+ lines of code
-Terminal.app: closed-source, unknown complexity
-Safari: Webkit alone is 1.8 million lines of code
-vim: 340485
-git: 355018
-fish: 47866
-ag: 4329
-selecta: 818
-v8: 523000
-node: 27687
-scala: 172017
+- Mac OS X: closed-source, 87 million+ lines of code
+- Terminal.app: closed-source, unknown complexity
+- Safari: Webkit alone is 1.8 million lines of code
+- vim: 340485
+- git: 355018
+- fish: 47866
+- ag: 4329
+- selecta: 818
+- v8: 523000
+- node: 27687
+- scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
 
