@@ -1,7 +1,11 @@
 complexity hotspots
 ---
 
-the worst feeling as a user of a general purpose computer is the sense that
+_note: this was mostly written in July 2015 and promptly forgotten about. I 
+stumbled upon it over the weekend and enjoyed reading it, so I'm publishing
+it now._
+
+The worst feeling as a user of a general purpose computer is the sense that
 the computer is getting away from you; the sense that you're no longer in
 control of what's going on and don't even understand how you might regain it.
 
@@ -60,46 +64,46 @@ scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
 
-OpenBSD: 11473033 (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
-WebKit: 1.8 million lines of code
-mesa: a million lines of code
-vim: 340485
-git: 355018
-btrfs: 86000 
-weston: 28648
-cljs: 23934 (a replacement for scala and ruby, though I can't evade the cost of a javascript runtime)
-dash: 13485
-pacman: 19189
-ag: 4329
-st: 3594
-selecta: 818
+- OpenBSD: 11473033 (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
+- WebKit: 1.8 million lines of code
+- mesa: a million lines of code
+- vim: 340485
+- git: 355018
+- btrfs: 86000 
+- weston: 28648
+- cljs: 23934 (a replacement for scala and ruby, though I can't evade the cost of a javascript runtime)
+- dash: 13485
+- pacman: 19189
+- ag: 4329
+- st: 3594 (a replacement terminal emulator. for comparison, xterm is around 90kloc)
+- selecta: 818
 
 note: some of the older C programs seem to also implement their own malloc and realloc.
 
 Where are the hotspots in this profile?
 
-The kernel & the web browser are both on the order of 10^7
-the graphics system and programming vm => 10^6
-editing and version controlling files => 10^5
-the filesystem and window compositor => 10^4
-the programming language, shell, and package manager => a smaller 10^4
-fast file search, terminal emulator => 10^3
-fuzzy text selection => 10^2 (ruby)
+- The kernel & the web browser are both on the order of 10^7
+- the graphics system and programming vm => 10^6
+- editing and version controlling files => 10^5
+- the filesystem and window compositor => 10^4
+- the programming language, shell, and package manager => a smaller 10^4
+- fast file search, terminal emulator => 10^3
+- fuzzy text selection => 10^2 (ruby)
 
 Here's the thing: I don't think editing and version controlling files 
 should be in that 10^5 tier. What's a reasonable lower bound for the
 complexity of these tasks?
 
-Mary wrote gitlet.js as an exploration of the complexity of git. It's a
-svelte 977 lines of javascript, back in the same ballpark as selecta.  And as
+Mary wrote gitlet.js as an exploration of the complexity of git. It's
+977 lines of javascript, back in the same ballpark as selecta.  And as
 far as text editing is concerned, the simplest text editor that I know of is
 ed, the standard unix editor: 1545 lines of C. Let's slot these in as lower
 bounds. What does our profile look like now?
 
-The kernel and web browser => 10^7
-the graphics system and programming vm => 10^6
-the filesystem, window compositor, shell and programming language => 10^5
-search, terminal emulator, fuzzy selecting, editing, and version controlling text => 10^4
+- The kernel and web browser => 10^7
+- the graphics system and programming vm => 10^6
+- the filesystem, window compositor, shell and programming language => 10^5
+- search, terminal emulator, fuzzy selecting, editing, and version controlling text => 10^4
 
 Wait a second, though: how are we ever going to compile all of this C?
 Compiler infrastructure is a grim story. Clang and LLVM are the
@@ -117,26 +121,23 @@ order of magnitude increase in codebase size?
 So let's try and split these programs up into categories. Where is most of our
 complexity budget spent? Does the distribution make sense to us?
 
-programmer interface:
-  dash: 13485 (C)
-  selecta: 818 (Ruby)
-  ag: 4329 (C)
-  find: 1803 (C)
-  gitlet: 958 (js)
-  ed: 1534 (C)
-
-programming system:
-  cljs: 23934 (cljs)
-  v8, spidermonkey, or jsc: 292000-520000 (C++)
-
-user interface:
-  st: 3594 (C)
-  weston: 28648 (C)
-  mesa: 1000000 (C)
-  webkit: 2 million (C++)
-
-durability, persistence:
-  btrfs: 86207 (C)
+- programmer interface:
+  - dash: 13485 (C)
+  - selecta: 818 (Ruby)
+  - ag: 4329 (C)
+  - find: 1803 (C)
+  - gitlet: 958 (js)
+  - ed: 1534 (C)
+- programming system:
+  - cljs: 23934 (cljs)
+  - v8, spidermonkey, or jsc: 292000-520000 (C++)
+- user interface: 
+  - st: 3594 (C)
+  - weston: 28648 (C)
+  - mesa: 1000000 (C)
+  - webkit: 2 million (C++)
+- durability, persistence:
+  - btrfs: 86207 (C)
 
 Giant chunks of this are related to performant implementations of javascript
 and the web. It's sobering to realize that part of the legacy of the web
@@ -169,3 +170,5 @@ comprehend the web?) but perhaps this is a good place to stop and think.
 (eventually)
 servo: 200000 (rust)
 browser.html: 2590 (js)
+
+_Thanks to Julia, Panashe, and Dan for their feedback on this post._
