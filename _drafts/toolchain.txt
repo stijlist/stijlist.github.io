@@ -60,7 +60,7 @@ scala: 172017
 
 Here's a hypothetical list of ways I could "trade down":
 
-linux: 15 million lines of code (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
+OpenBSD: 11473033 (jeeeez. still an order-of-magnitude reduction vs OS X, though.)
 WebKit: 1.8 million lines of code
 mesa: a million lines of code
 vim: 340485
