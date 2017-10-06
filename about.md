@@ -6,11 +6,11 @@ permalink: /about/
 
 
 
-My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Hacker School][hackerschool] alum based in New York City, currently working for [Sefaira][sefaira]. 
+My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Recurse Center][recurse center] alum based in New York City, currently working in technical infrastructure at Google [google]. I used to work at [Sefaira][sefaira].
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
-My projects are on [GitHub][1], and I write over at
+My projects are on [GitHub][1], and I write here at
 [somethingdoneright.net][2].
 
 I aim to focus on the fact that technology is a tool, and it's more important 
@@ -37,8 +37,9 @@ In my projects, I strive to:
 [1]: http://github.com/stijlist
 [2]: http://somethingdoneright.net
 [3]: http://paulgraham.com/avg.html
+[google]: http://google.com
 [sefaira]: http://sefaira.com
-[hackerschool]: http://hackerschool.com
+[recurse center]: http://recurse.com
 [vpri]: http://www.vpri.org/pdf/tr2011004_steps11.pdf
 [forth]: http://www.yosefk.com/blog/my-history-with-forth-stack-machines.html
 [bloom]: http://boom.cs.berkeley.edu
