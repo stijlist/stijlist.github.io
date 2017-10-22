@@ -1,0 +1,7 @@
+blog about debug-let
+blog about humane interfaces
+blog about canarying leverage
+blog about being fed hard problems
+blog about things that make a good life
+blog about fluency vs expressiveness
+blog about version control systems as the best place to build institutional knowledge
