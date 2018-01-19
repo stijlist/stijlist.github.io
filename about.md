@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Recurse Center][recurse center] alum based in New York City, currently working in technical infrastructure at [Google][google]. I used to work at [Sefaira][sefaira].
+My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Recurse Center][recurse center] alum based in New York City, currently working on [Fuchsia][fuchsia] at [Google][google]. I used to work at [Sefaira][sefaira].
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
@@ -39,6 +39,7 @@ In my projects, I strive to:
 [3]: http://paulgraham.com/avg.html
 [google]: http://google.com
 [sefaira]: http://sefaira.com
+[fuchsia]: https://fuchsia.googlesource.com/fuchsia
 [recurse center]: http://recurse.com
 [vpri]: http://www.vpri.org/pdf/tr2011004_steps11.pdf
 [forth]: http://www.yosefk.com/blog/my-history-with-forth-stack-machines.html
