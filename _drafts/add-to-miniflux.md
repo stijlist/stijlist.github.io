@@ -11,7 +11,7 @@ Most things work as you'd expect, and read state syncing between devices can be 
 On my iOS device, I use an app called [Reeder][reeder] for RSS, which happens to support Fever (hooray!).
 However, the Fever protocol doesn't have support for adding or removing feeds, which means Reeder's add/remove feed functionality is disabled when syncing via Fever.
 
-I hacked around this with an iOS "Shortcut" - in short, Apple bought an app called [Workflow][workflow] and incorporated it into iOS as [Shortcuts][shortcuts].
+I hacked around this with an iOS ["Shortcut"][shortcuts] - Apple's end-user scripting system for iOS.
 
 In theory, if this particular Apple vision of end-user computing is still intact at the time that you're reading this, you should be able to see my "Shortcut" at this URL:
 
@@ -28,6 +28,7 @@ The Shortcuts app should ask you for your API key (which you can generate at htt
 If you find this useful and give it a shot, let me know how it works out - I'm curious what the experience is like (I certainly didn't find it straightforward :)).
 
 [miniflux]: https://miniflux.app/
+[fever]: https://feedafever.com/
 [reeder]: https://reederapp.com/
 [workflow]: https://workflow.is/
 [shortcuts]: https://support.apple.com/en-us/HT208309
