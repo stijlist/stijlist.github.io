@@ -21,9 +21,9 @@ The privacy model on Shortcut sharing isn't obvious at first, but I clicked thro
 
 > If your shortcut includes steps that contain personal information, such as addresses, contacts, phone numbers, or the name of a playlist, you can add import questions to those specific fields of the shortcut. If an import question is present for a field, your personal information is not shared—that field is cleared when the shortcut is shared. When the recipient runs the shortcut, he or she is presented with the import questions. When the questions are answered, the shortcut is populated with the user’s own information.
 
-The Shortcuts app should&sup1; ask you for your API key (which you can generate at https://miniflux.app/keys) and the default category_id to add the given feed to (I feel like this should be an optional parameter with a default, but you can find your list of categories at https://miniflux.app/categories), and in theory you should be able to then use it from the iOS share sheet after toggling "show in share sheet."
+The Shortcuts app should&sup1; ask you for your API key (which you can generate at https://miniflux.app/keys) and the default category_id to add the given feed to (I feel like this should be an optional parameter with a default, but you can find your list of categories at https://miniflux.app/categories).
 
-Once "show in share sheet" is enabled, "Add to Miniflux" will show up after long-pressing any URL and pressing the "share" icon, and should&sup2; work correctly if the URL in question is an RSS feed.
+"Add to Miniflux" should show up in the iOS share sheet after long-pressing any URL and pressing the "share" icon, and should&sup2; work correctly if the URL in question is an RSS feed.
 
 My usual gripes about Apple's perspective on end-user computing still apply, but it's satisfying to see "Add to Miniflux" sitting in the system UI - I would never know it was a user extension.
 
