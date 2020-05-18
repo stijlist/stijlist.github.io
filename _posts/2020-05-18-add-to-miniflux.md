@@ -1,5 +1,5 @@
 ---
-title: iOS shortcut: "add RSS feed to miniflux"
+title: "iOS shortcut: add RSS feed to miniflux"
 layout: post
 ---
 
