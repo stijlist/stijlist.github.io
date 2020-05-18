@@ -17,7 +17,13 @@ In theory, if this particular Apple vision of end-user computing is still intact
 
 https://www.icloud.com/shortcuts/df4e466c5f3f435ea06bd533ca0df45f
 
-It should ask you for your API key (which you can generate at https://miniflux.app/keys) and the default category_id to add the given feed to (I feel like this should be an optional parameter with a default, but you can find your list of categories at https://miniflux.app/categories), and in theory you should be able to then use it from the iOS share sheet after toggling "show in share sheet."
+The privacy model on Shortcut sharing isn't obvious at first, but I clicked through the app to [Apple's user guide][shortcuts-user-guide], and that [clarified things][shortcuts-user-guide-import-questions]:
+
+> If your shortcut includes steps that contain personal information, such as addresses, contacts, phone numbers, or the name of a playlist, you can add import questions to those specific fields of the shortcut. If an import question is present for a field, your personal information is not shared—that field is cleared when the shortcut is shared. When the recipient runs the shortcut, he or she is presented with the import questions. When the questions are answered, the shortcut is populated with the user’s own information.
+
+The Shortcuts app should ask you for your API key (which you can generate at https://miniflux.app/keys) and the default category_id to add the given feed to (I feel like this should be an optional parameter with a default, but you can find your list of categories at https://miniflux.app/categories), and in theory you should be able to then use it from the iOS share sheet after toggling "show in share sheet."
+
+(If it doesn't do this, there's a "Customize Shortcut" button that pulls up the import questions I added as well.)
 
 If you find this useful and give it a shot, let me know how it works out - I'm curious what the experience is like (I certainly didn't find it straightforward :)).
 
@@ -25,3 +31,5 @@ If you find this useful and give it a shot, let me know how it works out - I'm c
 [reeder]: https://reederapp.com/
 [workflow]: https://workflow.is/
 [shortcuts]: https://support.apple.com/en-us/HT208309
+[shortcuts-user-guide]: https://support.apple.com/guide/shortcuts/welcome/ios
+[shortcuts-user-guide-import-questions]: https://support.apple.com/guide/shortcuts/add-import-questions-before-sharing-apdf330fd3a0/ios
