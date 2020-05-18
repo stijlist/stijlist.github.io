@@ -6,7 +6,7 @@ layout: post
 _a short sojourn into smartphone "shortcuts"_
 
 I tried an indie RSS reader called [miniflux][miniflux] the other week.
-Most things work as you'd expect, and read state syncing between devices can be accomplished via a protocol called [Fever][fever], built by another indie RSS app maintainer (the website is from a more innocent time).
+Most things work as you'd expect, and read state syncing between devices can be accomplished via a protocol called [Fever][fever], built by another indie RSS app maintainer (Fever's website is from a more innocent time).
 
 On my iOS device, I use an app called [Reeder][reeder] for RSS, which happens to support Fever (hooray!).
 However, the Fever protocol doesn't have support for adding or removing feeds, which means Reeder's add/remove feed functionality is disabled when syncing via Fever.
