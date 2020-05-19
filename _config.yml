@@ -10,4 +10,4 @@ github_username:  stijlist
 vanity_url: http://statsdoneright.herokuapp.com
 
 # Build settings
-markdown: kramdown
+markdown: GFM
