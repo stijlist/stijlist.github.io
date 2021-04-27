@@ -6,7 +6,10 @@ permalink: /about/
 
 
 
-My name is Bert Muthalaly, and I'm a programmer, student of economics, and [Recurse Center][recurse center] alum based in New York City, currently working on [Fuchsia][fuchsia] at [Google][google]. I used to work at [Sefaira][sefaira].
+My name is Bert Muthalaly, and I'm a programmer and [Recurse Center][recurse center] alum based in New York City, currently taking a sabbatical.
+I spent the last several years working on [Fuchsia][fuchsia] at [Google][google].
+Before that, I worked at [Sefaira][sefaira].
+
 I'm interested in the intersection of engineering, business, and the
 improvement of human welfare.
 
