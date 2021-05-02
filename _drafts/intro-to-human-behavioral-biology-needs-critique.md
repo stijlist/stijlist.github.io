@@ -1,12 +1,14 @@
-# "Intro to Human Behavioral Biology" needs critique
-
+---
+title: "Intro to Human Behavioral Biology" needs critique
+layout: post
+---
 I was watching Robert Sapolsky’s “Intro to Human Behavioral Biology” due to the YouTube recommendation algorithm and found an early claim&sup1; in lecture two pretty surprising.
 
 I kept watching the lecture because Sapolsky is charismatic and knowledgeable, but the claim was never supported and it stuck in my craw.
 
 The lecture is from before the replication crisis (lecture circa April 2010, [landmark replication study circa 2015][replication-study], and I thought it’d be worth looking for widely read critiques or reviews of his work.
 
-Luckily, Sapolsky wrote a book (Behave, 2017) that surveys the field of human behavior comprehensively and serves as a schelling point for discussion of his work. [Matt Clancy][matt-clancy] [on Goodreads][matt-clancy-goodreads] registered a similarly suspect claim and read the rest of the book wary of works cited that were later unable to be replicated:
+Luckily, Sapolsky wrote a book ("Behave", 2017) that surveys the field of human behavior comprehensively and serves as a schelling point for discussion of his work. [Matt Clancy][matt-clancy] [on Goodreads][matt-clancy-goodreads] registered a similarly suspect claim and read the rest of the book wary of works cited that were later unable to be replicated:
 
 > After Sapolsky mentioned a study that I know researchers have failed to replicate, I waited for him to discuss the subsequent controversy. He never did. At that point, I started keeping a tally of "red flags:" studies that have subsequently come under fire, but where Sapolsky fails to acknowledge any controversy about their findings.
 
