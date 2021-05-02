@@ -1,6 +1,6 @@
 # "Intro to Human Behavioral Biology" needs critique
 
-I was watching Robert Sapolsky’s “Intro to Human Behavioral Biology” due to the YouTube recommendation algorithm and found an early claim in lecture two pretty surprising.
+I was watching Robert Sapolsky’s “Intro to Human Behavioral Biology” due to the YouTube recommendation algorithm and found an early claim&sup1; in lecture two pretty surprising.
 
 I kept watching the lecture because Sapolsky is charismatic and knowledgeable, but the claim was never supported and it stuck in my craw.
 
@@ -24,6 +24,14 @@ I’m writing this post so that hopefully “critique of human behavioral biolog
 
 In the best-case scenario perhaps we’ll have some other expert anthropologists or Sapolsky himself weigh in - maybe we'll learn there’s a second edition coming or find a more comprehensive critique than those I’ve found.
 
+<br>
+<br>
+
+---
+
+&sup1; 
+“You are a field biologist, and you’ve discovered this brand new species. And you [know] that this one [is a female] and this one [is a male], [otherwise having access to] only the skull. And if you’ve got the right tools there, you can figure out [based on only the fossil record, i.e. the skull] who’s more likely to cheat on the other. Is the female more likely to mess around, or is the male?” ([4:48-5:17 in "Intro to Human Behavioral Biology" lecture 2][ihbb-lecture-2])
+
 [replication-study]: https://science.sciencemag.org/content/349/6251/aac4716.abstract
 [matt-clancy-review]: https://www.goodreads.com/review/show/2117427600?book_show_action=true&from_review_page=1
 [matt-clancy]: http://matt-clancy.com
@@ -32,3 +40,4 @@ In the best-case scenario perhaps we’ll have some other expert anthropologists
 [guardian-review]: https://www.theguardian.com/books/2017/jun/09/behave-by-robert-sapolsky-review
 [spectator-review]: https://www.spectator.co.uk/article/rules-of-behaviour
 [epistemic-spot-checks]: https://acesounderglass.com/2019/10/17/what-comes-after-epistemic-spot-checks/
+[ihbb-lecture-2]: https://youtu.be/Y0Oa4Lp5fLE?t=227
