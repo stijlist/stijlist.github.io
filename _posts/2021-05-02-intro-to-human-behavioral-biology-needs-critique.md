@@ -1,5 +1,5 @@
 ---
-title: "Intro to Human Behavioral Biology" needs critique
+title: '"Intro to Human Behavioral Biology" needs critique'
 layout: post
 ---
 I was watching Robert Sapolsky’s “Intro to Human Behavioral Biology” due to the YouTube recommendation algorithm and found an early claim&sup1; in lecture two pretty surprising.
