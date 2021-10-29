@@ -1,4 +1,7 @@
-# assessing python startup time (for potential speedups with io_uring)
+---
+title: assessing python startup time (for potential speedups with io_uring)
+layout: post
+---
 
 (trying the one-pass / no editing blog post style)
 
