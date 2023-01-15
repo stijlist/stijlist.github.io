@@ -5,3 +5,6 @@ blog about being fed hard problems
 blog about things that make a good life
 blog about fluency vs expressiveness
 blog about version control systems as the best place to build institutional knowledge
+
+blog about computing history being a superpower
+blog about blessed objects
