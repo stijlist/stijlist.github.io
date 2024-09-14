@@ -1,8 +1,7 @@
 redo-ifchange "$2.md"
 
-dateprefix=`echo $2.md | grep -Eo '[[:digit:]]+-[[:digit:]]+-[[:digit:]]+'`
-date -j -f "%F" $dateprefix +"%B %d, %Y" > date.temp
-grep title: "$2.md" | sed -e 's/title: //g' > title.temp
+./post-date.sh "$2.md" > date.temp
+./post-title.sh "$2.md" > title.temp
 read DATE < date.temp
 read TITLE < title.temp
 tail -n +5 "$2.md" > md.temp
