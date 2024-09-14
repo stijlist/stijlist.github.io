@@ -2,6 +2,7 @@
 find files -type f -regex '.*\.md' -print0 > posts.temp
 cat posts.temp | xargs -r0 redo-ifchange
 
+cat head.html header.html | sed -f site-variables.sed
 cat <<EOF 
 <div class="home">
   <h1 class="page-heading">Posts</h1>
@@ -26,4 +27,5 @@ cat <<EOF
   </ul>
 </div>
 EOF
+cat footer.html | sed -f site-variables.sed
 rm posts.temp date.temp title.temp url.temp
