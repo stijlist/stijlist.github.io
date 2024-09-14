@@ -52,10 +52,13 @@ brew install cmark redo go
 ```
 
 `redo blogserver` should build everything, but it doesn't - you'll have to manually run `redo index.html` as well.
+To deploy, `GOOS=linux GOARCH=amd64 go build && scp blogserver root@1.2.3.4:/blog/blogserver && ssh root@1.2.3.4 -c /blog/blogserver &`.
 
 # improvements
 
 * We should probably separate the input and output files (currently all in
 `files/*`) to different directories so the inputs don't end up in the binary.
 * `redo blogserver` should re-run `redo index.html` if there are any new input files.
+* Want to run certbot or other ACME infra somehow, maybe as a part of the same binary to keep deployment simple.
+* Maybe we could do blue/green deploys to eliminate unnecessary downtime while scp is running (lol).
 
