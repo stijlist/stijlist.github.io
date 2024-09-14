@@ -4,13 +4,15 @@ cat posts.temp | xargs -r0 redo-ifchange
 
 cat head.html header.html | sed -f site-variables.sed
 cat <<EOF 
+<div class="page-content">
+<div class="wrapper">
 <div class="home">
   <h1 class="page-heading">Posts</h1>
 
   <ul class="post-list">
 EOF
 
-find files -type f -regex '.*\.md' -print | while IFS= read -r post; do
+find files -type f -regex '.*\.md' -print | sort -nr | while IFS= read -r post; do
   ./post-date.sh "$post" > date.temp
   ./post-title.sh "$post" > title.temp
   ./post-url.sh "$post" > url.temp
@@ -25,6 +27,8 @@ done
 
 cat <<EOF 
   </ul>
+</div>
+</div>
 </div>
 EOF
 cat footer.html | sed -f site-variables.sed
