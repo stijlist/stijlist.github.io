@@ -4,7 +4,6 @@ import (
 	"embed"
 	"fmt"
 	"io"
-	"io/fs"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -41,11 +40,11 @@ var urlRemap = map[string]string{
 	"/2013/12/14/vaporware.html":                                        "files/2013-12-14-vaporware.html",
 	"/2013/12/14/open-source-on-apple's-app-store.html":                 "files/2013-12-14-open-source-on-apple's-app-store.html",
 	"/2013/12/12/recanted.html":                                         "files/2013-12-12-recanted.html",
-	"/2013/12/12/it's-a-trap.html":                                      "files/2013-12-12-it's-a-trap.html",
-	"/2013/12/07/cobble's-knot.html":                                    "files/2013-12-07-cobble's-knot.html",
+	"/2013/12/12/it's-a-trap.html":                                      "files/2013-12-12-its-a-trap.html",
+	"/2013/12/07/cobble's-knot.html":                                    "files/2013-12-07-cobbles-knot.html",
 	"/2013/12/06/finals-week.html":                                      "files/2013-12-06-finals-week.html",
 	"/2013/07/03/woodshed.html":                                         "files/2013-07-03-woodshed.html",
-	"/2013/04/19/kolmogorov's-browser.html":                             "files/2013-04-19-kolmogorov's-browser.html",
+	"/2013/04/19/kolmogorov's-browser.html":                             "files/2013-04-19-kolmogorovs-browser.html",
 }
 
 func main() {
@@ -58,11 +57,6 @@ func main() {
 		}
 		port = i
 	}
-	files, err := fs.Glob(embedded, "files/*")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("%s\n", files)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		var target string
