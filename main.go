@@ -17,6 +17,7 @@ var embedded embed.FS
 
 var urlRemap = map[string]string{
 	"/":             "files/index.html",
+	"/about/":        "files/about.html",
 	"/css/main.css": "files/main.css",
 	"/2021/10/29/investigating-python-startup-time.html":                "files/2021-10-29-investigating-python-startup-time.html",
 	"/2021/05/02/intro-to-human-behavioral-biology-needs-critique.html": "files/2021-05-02-intro-to-human-behavioral-biology-needs-critique.html",
