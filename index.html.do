@@ -15,7 +15,7 @@ EOF
 find files -type f -regex '.*\.md' -print | sort -nr | while IFS= read -r post; do
   ./post-date.sh "$post" > date.temp
   ./post-title.sh "$post" > title.temp
-  ./post-url.sh "$post" > url.temp
+  ./post-url.sh "$post" | sed -f url-fixups.sed > url.temp
   read DATE < date.temp
   read TITLE < title.temp
   read URL < url.temp

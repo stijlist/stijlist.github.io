@@ -38,7 +38,7 @@ var urlRemap = map[string]string{
 	"/2014/02/05/calculation-vs-presentation.html":                      "files/2014-02-05-calculation-vs-presentation.html",
 	"/2013/12/16/building-intuition.html":                               "files/2013-12-16-building-intuition.html",
 	"/2013/12/14/vaporware.html":                                        "files/2013-12-14-vaporware.html",
-	"/2013/12/14/open-source-on-apple's-app-store.html":                 "files/2013-12-14-open-source-on-apple's-app-store.html",
+	"/2013/12/14/open-source-on-apple's-app-store.html":                 "files/2013-12-14-open-source-on-apples-app-store.html",
 	"/2013/12/12/recanted.html":                                         "files/2013-12-12-recanted.html",
 	"/2013/12/12/it's-a-trap.html":                                      "files/2013-12-12-its-a-trap.html",
 	"/2013/12/07/cobble's-knot.html":                                    "files/2013-12-07-cobbles-knot.html",
