@@ -4,7 +4,7 @@ cat posts.temp | xargs -r0 redo-ifchange
 
 find files -type f -regex '.*\.md' -print0 | sed -e 's/\.md/\.html/g' | xargs -r0 redo-ifchange
 
-cat head.html header.html | sed -f site-variables.sed
+cat head.html header.html | sed -e 's/%PAGE-TITLE%/home/g' -f site-variables.sed
 cat <<EOF 
 <div class="page-content">
 <div class="wrapper">
