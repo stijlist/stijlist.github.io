@@ -51,7 +51,7 @@ Ensure you have go, a djb redo implementation, and commonmark (to convert md -> 
 brew install cmark redo go
 ```
 
-To deploy, `GOOS=linux GOARCH=amd64 go build && scp blogserver root@1.2.3.4:/blog/blogserver && ssh root@1.2.3.4 /blog/blogserver 80 &`.
+To deploy, `GOOS=linux GOARCH=amd64 go build && scp blogserver root@1.2.3.4:/blog/blogserver && ssh root@1.2.3.4 /blog/blogserver -port=80 &`.
 
 # improvements
 

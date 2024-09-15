@@ -2,21 +2,19 @@ package main
 
 import (
 	"embed"
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"path/filepath"
-	"strconv"
-	"strings"
 )
 
 //go:embed files
 var embedded embed.FS
 
-var urlRemap = map[string]string{
+var urls = map[string]string{
 	"/":             "files/index.html",
-	"/about/":        "files/about.html",
+	"/about/":       "files/about.html",
 	"/css/main.css": "files/main.css",
 	"/2021/10/29/investigating-python-startup-time.html":                "files/2021-10-29-investigating-python-startup-time.html",
 	"/2021/05/02/intro-to-human-behavioral-biology-needs-critique.html": "files/2021-05-02-intro-to-human-behavioral-biology-needs-critique.html",
@@ -47,41 +45,36 @@ var urlRemap = map[string]string{
 	"/2013/04/19/kolmogorov's-browser.html":                             "files/2013-04-19-kolmogorovs-browser.html",
 }
 
-func main() {
-	println("hello")
-	port := 8080
-	if len(os.Args) > 1 {
-		i, err := strconv.Atoi(os.Args[1])
-		if err != nil {
-			panic(err)
-		}
-		port = i
+func contentType(target string) string {
+	switch filepath.Ext(target) {
+	case ".html":
+		return "text/html; charset=utf-8"
+	case ".css":
+		return "text/css"
+	default:
+		return "text/plain; charset=utf-8"
 	}
+}
+
+func main() {
+	println("hello world")
+	var port int
+	flag.IntVar(&port, "port", 8080, "port to bind to. defaults to 8080")
+	flag.Parse()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		var target string
-		if remapped, ok := urlRemap[r.URL.Path]; ok {
-			target = remapped
-		} else {
-			target = strings.TrimLeft(r.URL.Path, "/")
-		}
-		var contentType string
-		switch filepath.Ext(target) {
-		case ".html":
-			contentType = "text/html; charset=utf-8"
-		case ".css":
-			contentType = "text/css"
-		default:
-			contentType = "text/plain; charset=utf-8"
-		}
-		w.Header().Add("Content-Type", contentType)
-		f, err := embedded.Open(target)
-		if err != nil {
-			w.WriteHeader(404)
-			fmt.Fprintf(w, "Not found")
+		if target, ok := urls[r.URL.Path]; ok {
+			w.Header().Add("Content-Type", contentType(target))
+			f, err := embedded.Open(target)
+			if err != nil {
+				goto notfound
+			}
+			io.Copy(w, f)
 			return
 		}
-		io.Copy(w, f)
+	notfound:
+		w.WriteHeader(404)
+		fmt.Fprint(w, "Not found")
 	})
 
 	bindaddr := fmt.Sprintf(":%d", port)
