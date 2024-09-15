@@ -6,7 +6,9 @@ import (
 	"io"
 	"io/fs"
 	"net/http"
+	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -47,6 +49,14 @@ var urlRemap = map[string]string{
 
 func main() {
 	println("hello")
+	port := 8080
+	if len(os.Args) > 1 {
+		i, err := strconv.Atoi(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		port = i
+	}
 	files, err := fs.Glob(embedded, "files/*")
 	if err != nil {
 		panic(err)
@@ -79,5 +89,6 @@ func main() {
 		io.Copy(w, f)
 	})
 
-	http.ListenAndServe(":8080", nil)
+	bindaddr := fmt.Sprintf(":%d", port)
+	http.ListenAndServe(bindaddr, nil)
 }
