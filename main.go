@@ -1,13 +1,17 @@
 package main
 
 import (
+	"bufio"
 	"embed"
 	"flag"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"path/filepath"
 	"time"
+
+	_ "net/http/pprof"
 )
 
 //go:embed files
@@ -62,11 +66,11 @@ func main() {
 	var port int
 	flag.IntVar(&port, "port", 8080, "port to bind to. defaults to 8080")
 	flag.Parse()
-
+	stdout := bufio.NewWriterSize(os.Stdout, 512)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		t := time.Now()
 		d, m, y := t.Date()
-		fmt.Printf("%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
+		fmt.Fprintf(stdout, "%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
 
 		if target, ok := urls[r.URL.Path]; ok {
 			w.Header().Add("Content-Type", contentType(target))
@@ -75,13 +79,13 @@ func main() {
 				goto notfound
 			}
 			io.Copy(w, f)
-			fmt.Printf(" 200\n")
+			fmt.Fprintf(stdout, " 200\n")
 			return
 		}
 	notfound:
 		w.WriteHeader(404)
 		fmt.Fprint(w, "Not found")
-		fmt.Printf(" 404\n")
+		fmt.Fprintf(stdout, " 404\n")
 	})
 
 	bindaddr := fmt.Sprintf(":%d", port)
