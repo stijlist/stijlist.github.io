@@ -60,4 +60,6 @@ To deploy, `GOOS=linux GOARCH=amd64 go build && scp blogserver root@1.2.3.4:/blo
 * Want to run certbot or other ACME infra somehow, maybe as a part of the same binary to keep deployment simple.
 * Would be nice to run jart's pledge port to privilege restrict the server binary.
 * Maybe we could do blue/green deploys to eliminate unnecessary downtime while scp is running (lol).
+* Maybe we could run a few instances and have multiple DNS servers that route you to whichever one is closest.
+  * How many DNS servers can you have in your DNS records?
 
