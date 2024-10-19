@@ -9,9 +9,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
+	"sync"
 	"time"
-
-	_ "net/http/pprof"
 )
 
 //go:embed files
@@ -66,11 +66,19 @@ func main() {
 	var port int
 	flag.IntVar(&port, "port", 8080, "port to bind to. defaults to 8080")
 	flag.Parse()
-	stdout := bufio.NewWriterSize(os.Stdout, 512)
+	stdout := bufio.NewWriter(os.Stdout)
+	defer stdout.Flush()
+	var stdoutMu sync.Mutex
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		t := time.Now()
 		d, m, y := t.Date()
-		fmt.Fprintf(stdout, "%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
+		var logbuilder strings.Builder
+		defer func() {
+			stdoutMu.Lock()
+			fmt.Fprint(stdout, logbuilder.String())
+			stdoutMu.Unlock()
+		}()
+		fmt.Fprintf(&logbuilder, "%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
 
 		if target, ok := urls[r.URL.Path]; ok {
 			w.Header().Add("Content-Type", contentType(target))
@@ -79,13 +87,13 @@ func main() {
 				goto notfound
 			}
 			io.Copy(w, f)
-			fmt.Fprintf(stdout, " 200\n")
+			fmt.Fprintf(&logbuilder, " 200\n")
 			return
 		}
 	notfound:
 		w.WriteHeader(404)
 		fmt.Fprint(w, "Not found")
-		fmt.Fprintf(stdout, " 404\n")
+		fmt.Fprintf(&logbuilder, " 404\n")
 	})
 
 	bindaddr := fmt.Sprintf(":%d", port)
