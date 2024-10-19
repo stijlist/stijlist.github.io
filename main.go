@@ -6,12 +6,12 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-	"strings"
-	"sync"
-	"time"
+
+	httplogger "github.com/gleicon/go-httplogger"
 )
 
 //go:embed files
@@ -68,18 +68,8 @@ func main() {
 	flag.Parse()
 	stdout := bufio.NewWriter(os.Stdout)
 	defer stdout.Flush()
-	var stdoutMu sync.Mutex
+	log.SetOutput(stdout)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		t := time.Now()
-		d, m, y := t.Date()
-		var logbuilder strings.Builder
-		defer func() {
-			stdoutMu.Lock()
-			fmt.Fprint(stdout, logbuilder.String())
-			stdoutMu.Unlock()
-		}()
-		fmt.Fprintf(&logbuilder, "%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
-
 		if target, ok := urls[r.URL.Path]; ok {
 			w.Header().Add("Content-Type", contentType(target))
 			f, err := embedded.Open(target)
@@ -87,15 +77,13 @@ func main() {
 				goto notfound
 			}
 			io.Copy(w, f)
-			fmt.Fprintf(&logbuilder, " 200\n")
 			return
 		}
 	notfound:
 		w.WriteHeader(404)
 		fmt.Fprint(w, "Not found")
-		fmt.Fprintf(&logbuilder, " 404\n")
 	})
 
 	bindaddr := fmt.Sprintf(":%d", port)
-	http.ListenAndServe(bindaddr, nil)
+	log.Fatal(http.ListenAndServe(bindaddr, httplogger.HTTPLogger(http.DefaultServeMux)))
 }
