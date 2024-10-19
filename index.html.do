@@ -1,5 +1,5 @@
 # if any markdown files are added, the index needs to include its posts.
-find files -type f -regex '.*\.md' -print0 > posts.temp
+find posts -type f -regex '.*\.md' -print0 > posts.temp
 cat posts.temp | xargs -r0 redo-ifchange
 
 find files -type f -regex '.*\.md' -print0 | sed -e 's/\.md/\.html/g' | xargs -r0 redo-ifchange
@@ -14,7 +14,7 @@ cat <<EOF
   <ul class="post-list">
 EOF
 
-find files -type f -regex '.*\.md' -print | sort -nr | while IFS= read -r post; do
+find posts -type f -regex '.*\.md' -print | sort -nr | while IFS= read -r post; do
   ./post-date.sh "$post" > date.temp
   ./post-title.sh "$post" > title.temp
   ./post-url.sh "$post" | sed -f url-fixups.sed > url.temp
