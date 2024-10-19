@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"path/filepath"
+	"time"
 )
 
 //go:embed files
@@ -63,6 +64,10 @@ func main() {
 	flag.Parse()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
+		d, m, y := t.Date()
+		fmt.Printf("%s - - %d/%d/%d:%02d:%02d:%02d %s %s", r.RemoteAddr, d, m, y, t.Hour(), t.Minute(), t.Second(), r.Method, r.URL.Path)
+
 		if target, ok := urls[r.URL.Path]; ok {
 			w.Header().Add("Content-Type", contentType(target))
 			f, err := embedded.Open(target)
@@ -70,11 +75,13 @@ func main() {
 				goto notfound
 			}
 			io.Copy(w, f)
+			fmt.Printf(" 200\n")
 			return
 		}
 	notfound:
 		w.WriteHeader(404)
 		fmt.Fprint(w, "Not found")
+		fmt.Printf(" 404\n")
 	})
 
 	bindaddr := fmt.Sprintf(":%d", port)
