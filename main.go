@@ -19,6 +19,7 @@ var embedded embed.FS
 
 var urls = map[string]string{
 	"/":             "files/index.html",
+	"/about":       "files/about.html",
 	"/about/":       "files/about.html",
 	"/css/main.css": "files/main.css",
 	"/2021/10/29/investigating-python-startup-time.html":                "files/2021-10-29-investigating-python-startup-time.html",
